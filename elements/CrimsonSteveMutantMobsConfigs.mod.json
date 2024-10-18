@@ -1,0 +1,66 @@
+{
+  "_fv": 66,
+  "_type": "config",
+  "definition": {
+    "pools": [
+      {
+        "category": "mutantSkeleton",
+        "entries": [
+          {
+            "item": {
+              "value": ""
+            },
+            "silkTouchMode": 1,
+            "block": {
+              "value": ""
+            },
+            "logicField": 0,
+            "numberField": 100.0,
+            "textDefault": "",
+            "comment": "Controls how much the mutant skeletons should be spawned. The spawnrate gets lower as the rolls value is larger.",
+            "vardisplay": "spawnRolls",
+            "varname": "mutantSkeletonSpawnRolls",
+            "enablecomment": false,
+            "stringlist": []
+          },
+          {
+            "item": {
+              "value": ""
+            },
+            "silkTouchMode": 0,
+            "block": {
+              "value": ""
+            },
+            "logicField": 0,
+            "numberField": 0.0,
+            "textDefault": "",
+            "comment": "If this config is enabled, the mutant skeletons only spawn next to skeletons.",
+            "vardisplay": "shouldSpawnNearbySkeletons",
+            "varname": "mutantSkeletonShouldSpawnNearbySkeletons",
+            "enablecomment": false,
+            "stringlist": []
+          },
+          {
+            "item": {
+              "value": ""
+            },
+            "silkTouchMode": 1,
+            "block": {
+              "value": ""
+            },
+            "logicField": 0,
+            "numberField": 1.0,
+            "textDefault": "",
+            "comment": "Control the mutant skeleton's size using this config!",
+            "vardisplay": "scale",
+            "varname": "mutantSkeletonScale",
+            "enablecomment": false,
+            "stringlist": []
+          }
+        ]
+      }
+    ],
+    "file": "CrimsonSteveMutantMobsConfig",
+    "configType": 0
+  }
+}

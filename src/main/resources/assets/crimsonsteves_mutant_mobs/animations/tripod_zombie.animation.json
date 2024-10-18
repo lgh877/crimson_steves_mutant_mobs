@@ -1,0 +1,92 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.tripod_zombie.idle": {
+			"loop": true
+		},
+		"animation.tripod_zombie.walk": {
+			"loop": true,
+			"bones": {
+				"whole": {
+					"rotation": {
+						"vector": [
+							"math.sin(query.life_time*360)*5*math.clamp(query.ground_speed*50,0,1)",
+							0,
+							"(math.pow(math.cos(query.life_time*180),2)*10-5)*math.clamp(query.ground_speed*50,0,1)"
+						]
+					}
+				},
+				"rightRearThigh": {
+					"rotation": {
+						"vector": [
+							"(math.pow(math.sin(query.life_time*180-70),2)*60-30)*math.clamp(query.ground_speed*50,0,1)",
+							"-20*math.clamp(query.ground_speed*50,0,1)",
+							"math.cos(query.anim_time*360-70)*10*math.clamp(query.ground_speed*50,0,1)"
+						]
+					}
+				},
+				"rightRearShank": {
+					"rotation": {
+						"vector": [
+							"math.pow(math.sin(query.life_time*360-70),2)*30*math.clamp(query.ground_speed*50,0,1)",
+							0,
+							"math.pow(math.sin(query.life_time*180-70),2)*30*math.clamp(query.ground_speed*50,0,1)"
+						]
+					}
+				},
+				"rightFrontThigh": {
+					"rotation": {
+						"vector": ["(math.pow(math.sin(query.life_time*180+150),2)*60-30)*math.clamp(query.ground_speed*50,0,1)", 0, 0]
+					}
+				},
+				"rightFrontShank": {
+					"rotation": {
+						"vector": ["math.pow(math.sin(query.life_time*360+150),2)*30*math.clamp(query.ground_speed*50,0,1)", 0, 0]
+					}
+				},
+				"leftThigh": {
+					"rotation": {
+						"vector": [
+							"math.sin(query.life_time*360)*30*math.clamp(query.ground_speed*50,0,1)",
+							0,
+							"math.cos(query.life_time*360)*5*math.clamp(query.ground_speed*50,0,1)"
+						]
+					}
+				},
+				"leftShank": {
+					"rotation": {
+						"vector": ["math.pow(math.sin(query.life_time*360+150),2)*30*math.clamp(query.ground_speed*50,0,1)", 0, 0]
+					}
+				}
+			}
+		},
+		"animation.tripod_zombie.punch": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 0.45,
+			"bones": {
+				"rightShoulder": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"rightWrist": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"rightFist": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					}
+				}
+			}
+		},
+		"animation.tripod_zombie.smash": {
+			"loop": "hold_on_last_frame"
+		},
+		"animation.tripod_zombie.horizontal_swing": {
+			"loop": "hold_on_last_frame"
+		}
+	},
+	"geckolib_format_version": 2
+}

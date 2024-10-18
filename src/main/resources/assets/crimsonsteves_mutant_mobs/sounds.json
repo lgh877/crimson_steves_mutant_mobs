@@ -1,0 +1,149 @@
+{
+  "mutant_skeleton_idle": {
+    "subtitle": "subtitles.mutant_skeleton_idle",
+    "sounds": [
+      {
+        "name": "crimsonsteves_mutant_mobs:msidle1",
+        "stream": false
+      },
+      {
+        "name": "crimsonsteves_mutant_mobs:msidle2",
+        "stream": false
+      },
+      {
+        "name": "crimsonsteves_mutant_mobs:msidle3",
+        "stream": false
+      },
+      {
+        "name": "crimsonsteves_mutant_mobs:msidle4",
+        "stream": false
+      }
+    ]
+  },
+  "mutant_skeleton_hurt": {
+    "subtitle": "subtitles.mutant_skeleton_hurt",
+    "sounds": [
+      {
+        "name": "crimsonsteves_mutant_mobs:mshurt1",
+        "stream": false
+      },
+      {
+        "name": "crimsonsteves_mutant_mobs:mshurt2",
+        "stream": false
+      },
+      {
+        "name": "crimsonsteves_mutant_mobs:mshurt3",
+        "stream": false
+      },
+      {
+        "name": "crimsonsteves_mutant_mobs:mshurt4",
+        "stream": false
+      }
+    ]
+  },
+  "mutant_skeleton_punch": {
+    "subtitle": "subtitles.mutant_skeleton_punch",
+    "sounds": [
+      {
+        "name": "crimsonsteves_mutant_mobs:mspunch1",
+        "stream": false
+      },
+      {
+        "name": "crimsonsteves_mutant_mobs:mspunch2",
+        "stream": false
+      },
+      {
+        "name": "crimsonsteves_mutant_mobs:mspunch3",
+        "stream": false
+      },
+      {
+        "name": "crimsonsteves_mutant_mobs:mspunch4",
+        "stream": false
+      },
+      {
+        "name": "crimsonsteves_mutant_mobs:mspunch5",
+        "stream": false
+      }
+    ]
+  },
+  "mutant_skeleton_smash": {
+    "subtitle": "subtitles.mutant_skeleton_smash",
+    "sounds": [
+      {
+        "name": "crimsonsteves_mutant_mobs:mssmash1",
+        "stream": false
+      },
+      {
+        "name": "crimsonsteves_mutant_mobs:mssmash2",
+        "stream": false
+      },
+      {
+        "name": "crimsonsteves_mutant_mobs:mssmash3",
+        "stream": false
+      },
+      {
+        "name": "crimsonsteves_mutant_mobs:mssmash4",
+        "stream": false
+      }
+    ]
+  },
+  "mutant_skeleton_step": {
+    "subtitle": "subtitles.mutant_skeleton_step",
+    "sounds": [
+      {
+        "name": "crimsonsteves_mutant_mobs:msstep1",
+        "stream": false
+      },
+      {
+        "name": "crimsonsteves_mutant_mobs:msstep2",
+        "stream": false
+      },
+      {
+        "name": "crimsonsteves_mutant_mobs:msstep3",
+        "stream": false
+      },
+      {
+        "name": "crimsonsteves_mutant_mobs:msstep4",
+        "stream": false
+      }
+    ]
+  },
+  "mutant_skeleton_avoid": {
+    "subtitle": "subtitles.mutant_skeleton_avoid",
+    "sounds": [
+      {
+        "name": "crimsonsteves_mutant_mobs:msavoid1",
+        "stream": false
+      },
+      {
+        "name": "crimsonsteves_mutant_mobs:msavoid2",
+        "stream": false
+      },
+      {
+        "name": "crimsonsteves_mutant_mobs:msavoid3",
+        "stream": false
+      },
+      {
+        "name": "crimsonsteves_mutant_mobs:msavoid4",
+        "stream": false
+      }
+    ]
+  },
+  "mutant_skeleton_death": {
+    "subtitle": "subtitles.mutant_skeleton_death",
+    "sounds": [
+      {
+        "name": "crimsonsteves_mutant_mobs:msdeath1",
+        "stream": false
+      },
+      {
+        "name": "crimsonsteves_mutant_mobs:msdeath2",
+        "stream": false
+      },
+      {
+        "name": "crimsonsteves_mutant_mobs:msdeath3",
+        "stream": false
+      }
+    ]
+  }
+}

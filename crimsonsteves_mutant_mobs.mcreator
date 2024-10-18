@@ -1,0 +1,571 @@
+{
+  "mod_elements": [
+    {
+      "name": "MutantSkeleton",
+      "type": "animatedentity",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "mutant_skeleton",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/crimsonsteves_mutant_mobs/models/item/mutant_skeleton_spawn_egg.json",
+          "src/main/java/net/crimsonsteve/simplemutantmobs/client/renderer/MutantSkeletonRenderer.java",
+          "src/main/resources/data/crimsonsteves_mutant_mobs/forge/biome_modifier/mutant_skeleton_biome_modifier.json",
+          "src/main/java/net/crimsonsteve/simplemutantmobs/entity/model/MutantSkeletonModel.java",
+          "src/main/java/net/crimsonsteve/simplemutantmobs/entity/MutantSkeletonEntity.java"
+        ]
+      },
+      "path": "~/mutantskeleton"
+    },
+    {
+      "name": "MutantSkeletonOnEntityTickUpdate",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "mutant_skeleton_on_entity_tick_update",
+      "metadata": {
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/MutantSkeletonOnEntityTickUpdateProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/mutantskeleton"
+    },
+    {
+      "name": "ShouldStopMSkele",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "should_stop_m_skele",
+      "metadata": {
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/ShouldStopMSkeleProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/mutantskeleton"
+    },
+    {
+      "name": "CalculateViewVectorX",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "calculate_view_vector_x",
+      "metadata": {
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/CalculateViewVectorXProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "wantedPitch",
+            "type": "number"
+          },
+          {
+            "name": "wantedYaw",
+            "type": "number"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CalculateViewVectorY",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "calculate_view_vector_y",
+      "metadata": {
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/CalculateViewVectorYProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "wantedPitch",
+            "type": "number"
+          },
+          {
+            "name": "wantedYaw",
+            "type": "number"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CalculateViewVectorZ",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "calculate_view_vector_z",
+      "metadata": {
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/CalculateViewVectorZProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "wantedPitch",
+            "type": "number"
+          },
+          {
+            "name": "wantedYaw",
+            "type": "number"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MutantSkeletonSpawnCondition",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "mutant_skeleton_spawn_condition",
+      "metadata": {
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/MutantSkeletonSpawnConditionProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/mutantskeleton"
+    },
+    {
+      "name": "MutantSkeletonLootTable",
+      "type": "loottable",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "mutant_skeleton_loot_table",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/crimsonsteves_mutant_mobs/loot_tables/entities/mutant_skeleton.json"
+        ]
+      },
+      "path": "~/mutantskeleton"
+    },
+    {
+      "name": "GetDistanceToTarget",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "get_distance_to_target",
+      "metadata": {
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/GetDistanceToTargetProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "x0",
+            "type": "number"
+          },
+          {
+            "name": "x1",
+            "type": "number"
+          },
+          {
+            "name": "y0",
+            "type": "number"
+          },
+          {
+            "name": "y1",
+            "type": "number"
+          },
+          {
+            "name": "z0",
+            "type": "number"
+          },
+          {
+            "name": "z1",
+            "type": "number"
+          }
+        ]
+      }
+    },
+    {
+      "name": "GetDistanceToTargetFlat",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "get_distance_to_target_flat",
+      "metadata": {
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/GetDistanceToTargetFlatProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "x0",
+            "type": "number"
+          },
+          {
+            "name": "x1",
+            "type": "number"
+          },
+          {
+            "name": "z0",
+            "type": "number"
+          },
+          {
+            "name": "z1",
+            "type": "number"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CrimsonSteveMutantMobsConfigs",
+      "type": "config",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "crimson_steve_mutant_mobs_configs",
+      "metadata": {
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/configuration/CrimsonSteveMutantMobsConfigsConfiguration.java"
+        ]
+      },
+      "path": "~/config"
+    },
+    {
+      "name": "MutantSkeletonEntityScale",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "mutant_skeleton_entity_scale",
+      "metadata": {
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/MutantSkeletonEntityScaleProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/mutantskeleton"
+    },
+    {
+      "name": "MutantSkeletonOnInitialEntitySpawn",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "mutant_skeleton_on_initial_entity_spawn",
+      "metadata": {
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/MutantSkeletonOnInitialEntitySpawnProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/mutantskeleton"
+    },
+    {
+      "name": "CalculateVectorNormalizeZ",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "calculate_vector_normalize_z",
+      "metadata": {
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/CalculateVectorNormalizeZProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "x1",
+            "type": "number"
+          },
+          {
+            "name": "y1",
+            "type": "number"
+          },
+          {
+            "name": "z1",
+            "type": "number"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CalculateVectorNormalizeX",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "calculate_vector_normalize_x",
+      "metadata": {
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/CalculateVectorNormalizeXProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "x1",
+            "type": "number"
+          },
+          {
+            "name": "y1",
+            "type": "number"
+          },
+          {
+            "name": "z1",
+            "type": "number"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CalculateFlatVecNormalizeX",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "calculate_flat_vec_normalize_x",
+      "metadata": {
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/CalculateFlatVecNormalizeXProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "x1",
+            "type": "number"
+          },
+          {
+            "name": "z1",
+            "type": "number"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CalculateFlatVecNormalizeZ",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "calculate_flat_vec_normalize_z",
+      "metadata": {
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/CalculateFlatVecNormalizeZProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "x1",
+            "type": "number"
+          },
+          {
+            "name": "z1",
+            "type": "number"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MutantSkeletonMoveControl",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "mutant_skeleton_move_control",
+      "metadata": {
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/MutantSkeletonMoveControl.java"
+        ]
+      }
+    }
+  ],
+  "variable_elements": [],
+  "sound_elements": [
+    {
+      "name": "mutant_skeleton_idle",
+      "files": [
+        "msidle1",
+        "msidle2",
+        "msidle3",
+        "msidle4"
+      ],
+      "category": "hostile",
+      "subtitle": "Mutant skeleton idle"
+    },
+    {
+      "name": "mutant_skeleton_hurt",
+      "files": [
+        "mshurt1",
+        "mshurt2",
+        "mshurt3",
+        "mshurt4"
+      ],
+      "category": "hostile",
+      "subtitle": "Mutant skeleton gets hurt"
+    },
+    {
+      "name": "mutant_skeleton_punch",
+      "files": [
+        "mspunch1",
+        "mspunch2",
+        "mspunch3",
+        "mspunch4",
+        "mspunch5"
+      ],
+      "category": "hostile",
+      "subtitle": "Mutant skeleton attacks"
+    },
+    {
+      "name": "mutant_skeleton_smash",
+      "files": [
+        "mssmash1",
+        "mssmash2",
+        "mssmash3",
+        "mssmash4"
+      ],
+      "category": "hostile",
+      "subtitle": "Mutant skeleton smashes"
+    },
+    {
+      "name": "mutant_skeleton_step",
+      "files": [
+        "msstep1",
+        "msstep2",
+        "msstep3",
+        "msstep4"
+      ],
+      "category": "neutral",
+      "subtitle": "Mutant skeleton steps"
+    },
+    {
+      "name": "mutant_skeleton_avoid",
+      "files": [
+        "msavoid1",
+        "msavoid2",
+        "msavoid3",
+        "msavoid4"
+      ],
+      "category": "hostile",
+      "subtitle": "Mutant skeleton leaps"
+    },
+    {
+      "name": "mutant_skeleton_death",
+      "files": [
+        "msdeath1",
+        "msdeath2",
+        "msdeath3"
+      ],
+      "category": "hostile",
+      "subtitle": "Mutant skeleton collapses"
+    }
+  ],
+  "tag_elements": {},
+  "tab_element_order": {},
+  "language_map": {
+    "ko_kr": {
+      "subtitles.mutant_skeleton_step": "스턴트 스켈레톤이 걷는 소리",
+      "subtitles.mutant_skeleton_smash": "스턴트 스켈레톤이 바닥을 내려치는 소리",
+      "subtitles.mutant_skeleton_avoid": "스턴트 스켈레톤이 도약하는 소리",
+      "subtitles.mutant_skeleton_death": "스턴트 스켈레톤이 무너지는 소리",
+      "entity.crimsonsteves_mutant_mobs.mutant_skeleton": "스턴트 스켈레톤",
+      "subtitles.mutant_skeleton_hurt": "스턴트 스켈레톤이 공격받는 소리",
+      "subtitles.mutant_skeleton_punch": "스턴트 스켈레톤의 주먹 내지르는 소리",
+      "item.crimsonsteves_mutant_mobs.mutant_skeleton_spawn_egg": "스턴트 스켈레톤 생성 알",
+      "subtitles.mutant_skeleton_idle": "스턴트 스켈레톤의 평소 소리"
+    },
+    "en_us": {
+      "subtitles.mutant_skeleton_step": "Stunt skeleton steps",
+      "subtitles.mutant_skeleton_smash": "Stunt skeleton smashes",
+      "subtitles.mutant_skeleton_avoid": "Stunt skeleton leaps",
+      "subtitles.mutant_skeleton_death": "Stunt skeleton collapses",
+      "entity.crimsonsteves_mutant_mobs.mutant_skeleton": "Stunt Skeleton",
+      "subtitles.mutant_skeleton_hurt": "Stunt skeleton gets hurt",
+      "subtitles.mutant_skeleton_punch": "Stunt skeleton attacks",
+      "item.crimsonsteves_mutant_mobs.mutant_skeleton_spawn_egg": "Stunt Skeleton Spawn Egg",
+      "subtitles.mutant_skeleton_idle": "Stunt skeleton idle"
+    }
+  },
+  "foldersRoot": {
+    "name": "~",
+    "children": [
+      {
+        "name": "mutantskeleton",
+        "children": []
+      },
+      {
+        "name": "tripodzombie",
+        "children": []
+      },
+      {
+        "name": "testmobs",
+        "children": []
+      },
+      {
+        "name": "config",
+        "children": []
+      }
+    ]
+  },
+  "workspaceSettings": {
+    "modid": "crimsonsteves_mutant_mobs",
+    "modName": "crimsonsteves_mutant_mobs",
+    "version": "1.2.0",
+    "author": "Crimson Steve, MCreator",
+    "websiteURL": "https://mcreator.net",
+    "license": "All Rights Reserved",
+    "serverSideOnly": false,
+    "modPicture": "modlogo2",
+    "requiredMods": [],
+    "dependencies": [],
+    "dependants": [],
+    "mcreatorDependencies": [
+      "geckolib"
+    ],
+    "currentGenerator": "forge-1.20.1",
+    "credits": "Created using mod maker MCreator - https://mcreator.net/about",
+    "modElementsPackage": "net.crimsonsteve.simplemutantmobs"
+  },
+  "mcreatorVersion": 202400232117
+}

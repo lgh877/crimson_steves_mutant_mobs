@@ -1,0 +1,49 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.tripod_zombie_lower_body.walk": {
+			"loop": true,
+			"bones": {
+				"whole": {
+					"rotation": {
+						"vector": ["math.sin(query.life_time*360)*5", 0, "math.pow(math.cos(query.life_time*180),2)*10-5"]
+					}
+				},
+				"rightRearThigh": {
+					"rotation": {
+						"vector": ["math.pow(math.sin(query.life_time*180-70),2)*60-30", -20, "math.cos(query.anim_time*360-70)*10"]
+					}
+				},
+				"rightRearShank": {
+					"rotation": {
+						"vector": ["math.pow(math.sin(query.life_time*360-70),2)*30", 0, "math.pow(math.sin(query.life_time*180-70),2)*30"]
+					}
+				},
+				"rightFrontThigh": {
+					"rotation": {
+						"vector": ["math.pow(math.sin(query.life_time*180+150),2)*60-30", 0, 0]
+					}
+				},
+				"rightFrontShank": {
+					"rotation": {
+						"vector": ["math.pow(math.sin(query.life_time*360+150),2)*30", 0, 0]
+					}
+				},
+				"leftThigh": {
+					"rotation": {
+						"vector": ["math.sin(query.life_time*360)*30", 0, "math.cos(query.life_time*360)*5"]
+					}
+				},
+				"leftShank": {
+					"rotation": {
+						"vector": ["math.pow(math.sin(query.life_time*360),2)*30", 0, 0]
+					}
+				}
+			}
+		},
+		"animation.tripod_zombie_lower_body.idle": {
+			"loop": true
+		}
+	},
+	"geckolib_format_version": 2
+}

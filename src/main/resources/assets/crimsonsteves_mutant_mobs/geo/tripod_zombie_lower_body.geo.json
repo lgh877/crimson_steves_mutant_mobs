@@ -1,0 +1,78 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.tripod_zombie_lower_body",
+				"texture_width": 128,
+				"texture_height": 128,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "whole",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "lowerBody",
+					"parent": "whole",
+					"pivot": [0, 14, 0],
+					"cubes": [
+						{"origin": [-6, 14, -5], "size": [12, 11, 10], "pivot": [0, 14, 0], "rotation": [0, 0, -25], "uv": [48, 19]}
+					]
+				},
+				{
+					"name": "rightRearThigh",
+					"parent": "whole",
+					"pivot": [-6, 13, 3],
+					"rotation": [0, 30, 0],
+					"cubes": [
+						{"origin": [-14, 7.5, 0], "size": [7, 11, 7], "inflate": -1.5, "pivot": [-11, 9, 3], "rotation": [0, 0, 45], "uv": [32, 86]}
+					]
+				},
+				{
+					"name": "rightRearShank",
+					"parent": "rightRearThigh",
+					"pivot": [-9, 9, 3],
+					"cubes": [
+						{"origin": [-16, -2, -2], "size": [11, 13, 11], "inflate": -2, "uv": [37, 42]}
+					]
+				},
+				{
+					"name": "rightFrontThigh",
+					"parent": "whole",
+					"pivot": [-6, 14, -4],
+					"cubes": [
+						{"origin": [-9, 6.5, -7], "size": [6, 9, 6], "inflate": -1.5, "uv": [60, 86]}
+					]
+				},
+				{
+					"name": "rightFrontShank",
+					"parent": "rightFrontThigh",
+					"pivot": [-6, 8, -4],
+					"cubes": [
+						{"origin": [-10, -2, -8], "size": [8, 12, 8], "inflate": -2, "uv": [72, 66]}
+					]
+				},
+				{
+					"name": "leftThigh",
+					"parent": "whole",
+					"pivot": [7, 21, 0],
+					"cubes": [
+						{"origin": [4, 12, -3], "size": [6, 9, 6], "pivot": [7, 12, 0], "rotation": [0, 0, -15], "uv": [84, 86]}
+					]
+				},
+				{
+					"name": "leftShank",
+					"parent": "leftThigh",
+					"pivot": [7, 12, 0],
+					"cubes": [
+						{"origin": [3, 0, -4], "size": [8, 12, 8], "uv": [0, 81]}
+					]
+				}
+			]
+		}
+	]
+}
