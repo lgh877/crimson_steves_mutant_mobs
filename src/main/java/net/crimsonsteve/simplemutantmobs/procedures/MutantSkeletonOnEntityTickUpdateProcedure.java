@@ -9,18 +9,17 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.EntityDamageSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Mth;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 
 import net.crimsonsteve.simplemutantmobs.entity.MutantSkeletonEntity;
 
+import java.util.stream.Collectors;
 import java.util.List;
 import java.util.Comparator;
 
@@ -54,7 +53,7 @@ public class MutantSkeletonOnEntityTickUpdateProcedure {
 					{
 						final Vec3 _center = new Vec3(x, (y + entity.getBbWidth() * 2), z);
 						List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate((entity.getBbWidth() * 4) / 2d), e -> true).stream()
-								.sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+								.sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).collect(Collectors.toList());
 						for (Entity entityiterator : _entfound) {
 							if (target == entityiterator) {
 								random = Mth.nextInt(RandomSource.create(), 1, 10);
@@ -122,12 +121,12 @@ public class MutantSkeletonOnEntityTickUpdateProcedure {
 				}
 			}
 		}
-		if (world.isClientSide() && entity.onGround() && (entity instanceof MutantSkeletonEntity _datEntI ? _datEntI.getEntityData().get(MutantSkeletonEntity.DATA_attackType) : 0) == 0) {
+		if (world.isClientSide() && entity.isOnGround() && (entity instanceof MutantSkeletonEntity _datEntI ? _datEntI.getEntityData().get(MutantSkeletonEntity.DATA_attackType) : 0) == 0) {
 			if (!entity.isSprinting()) {
 				if (entity.tickCount % 15 == 1 && GetDistanceToTargetFlatProcedure.execute(0, entity.getDeltaMovement().x(), 0, entity.getDeltaMovement().z()) > 0.01) {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_step")), SoundSource.HOSTILE, (float) 0.25, 1);
+							_level.playSound(null, new BlockPos(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_step")), SoundSource.HOSTILE, (float) 0.25, 1);
 						} else {
 							_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_step")), SoundSource.HOSTILE, (float) 0.25, 1, false);
 						}
@@ -136,7 +135,7 @@ public class MutantSkeletonOnEntityTickUpdateProcedure {
 			} else if (entity.tickCount % 6 == 1 && GetDistanceToTargetFlatProcedure.execute(0, entity.getDeltaMovement().x(), 0, entity.getDeltaMovement().z()) > 0.01) {
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_step")), SoundSource.HOSTILE, (float) 0.25, 1);
+						_level.playSound(null, new BlockPos(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_step")), SoundSource.HOSTILE, (float) 0.25, 1);
 					} else {
 						_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_step")), SoundSource.HOSTILE, (float) 0.25, 1, false);
 					}
@@ -184,7 +183,7 @@ public class MutantSkeletonOnEntityTickUpdateProcedure {
 							attackProgress = 2;
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_punch")), SoundSource.HOSTILE, 1, 1);
+									_level.playSound(null, new BlockPos(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_punch")), SoundSource.HOSTILE, 1, 1);
 								} else {
 									_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_punch")), SoundSource.HOSTILE, 1, 1, false);
 								}
@@ -192,23 +191,21 @@ public class MutantSkeletonOnEntityTickUpdateProcedure {
 							{
 								final Vec3 _center = new Vec3((x + lookX * entity.getBbWidth()), (y + entity.getBbWidth()), (z + lookZ * entity.getBbWidth()));
 								List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate((2 * entity.getBbWidth()) / 2d), e -> true).stream()
-										.sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+										.sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).collect(Collectors.toList());
 								for (Entity entityiterator : _entfound) {
 									if (!(entity == entityiterator)) {
 										entityiterator.invulnerableTime = 0;
-										entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity),
-												(float) (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue() * dmgMul));
+										entityiterator.hurt(new EntityDamageSource("generic", entity), (float) (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue() * dmgMul));
 									}
 								}
 							}
 							{
 								final Vec3 _center = new Vec3((x + lookX * entity.getBbWidth()), (y + 3 * entity.getBbWidth()), (z + lookZ * entity.getBbWidth()));
 								List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate((2 * entity.getBbWidth()) / 2d), e -> true).stream()
-										.sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+										.sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).collect(Collectors.toList());
 								for (Entity entityiterator : _entfound) {
 									if (!(entity == entityiterator)) {
-										entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity),
-												(float) (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue() * dmgMul));
+										entityiterator.hurt(new EntityDamageSource("generic", entity), (float) (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue() * dmgMul));
 									}
 								}
 							}
@@ -293,7 +290,7 @@ public class MutantSkeletonOnEntityTickUpdateProcedure {
 							attackProgress = 1;
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_avoid")), SoundSource.HOSTILE, 1, (float) 0.8);
+									_level.playSound(null, new BlockPos(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_avoid")), SoundSource.HOSTILE, 1, (float) 0.8);
 								} else {
 									_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_avoid")), SoundSource.HOSTILE, 1, (float) 0.8, false);
 								}
@@ -347,7 +344,7 @@ public class MutantSkeletonOnEntityTickUpdateProcedure {
 							attackProgress = 3;
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_smash")), SoundSource.HOSTILE, 1, 1);
+									_level.playSound(null, new BlockPos(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_smash")), SoundSource.HOSTILE, 1, 1);
 								} else {
 									_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_smash")), SoundSource.HOSTILE, 1, 1, false);
 								}
@@ -355,11 +352,10 @@ public class MutantSkeletonOnEntityTickUpdateProcedure {
 							{
 								final Vec3 _center = new Vec3((x + lookX * entity.getBbWidth() * 0.8), (y + 0.3 * entity.getBbWidth()), (z + lookZ * entity.getBbWidth() * 0.8));
 								List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate((2.5 * entity.getBbWidth()) / 2d), e -> true).stream()
-										.sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+										.sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).collect(Collectors.toList());
 								for (Entity entityiterator : _entfound) {
 									if (!(entity == entityiterator)) {
-										entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity),
-												(float) (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue() * dmgMul));
+										entityiterator.hurt(new EntityDamageSource("generic", entity), (float) (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue() * dmgMul));
 										entityiterator.setDeltaMovement(new Vec3((entity.getDeltaMovement().x() * ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_KNOCKBACK).getValue() * 2.5),
 												(entity.getDeltaMovement().y() * ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_KNOCKBACK).getValue() * 2.5),
 												(entity.getDeltaMovement().z() * ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_KNOCKBACK).getValue() * 2.5)));
@@ -369,11 +365,10 @@ public class MutantSkeletonOnEntityTickUpdateProcedure {
 							{
 								final Vec3 _center = new Vec3((x + lookX * entity.getBbWidth() * 0.8), (y + 1.3 * entity.getBbWidth()), (z + lookZ * entity.getBbWidth() * 0.8));
 								List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate((2.5 * entity.getBbWidth()) / 2d), e -> true).stream()
-										.sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+										.sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).collect(Collectors.toList());
 								for (Entity entityiterator : _entfound) {
 									if (!(entity == entityiterator)) {
-										entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity),
-												(float) (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue() * dmgMul));
+										entityiterator.hurt(new EntityDamageSource("generic", entity), (float) (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue() * dmgMul));
 										entityiterator.setDeltaMovement(new Vec3((entity.getDeltaMovement().x() * ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_KNOCKBACK).getValue() * 2.5),
 												(entity.getDeltaMovement().y() * ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_KNOCKBACK).getValue() * 2.5),
 												(entity.getDeltaMovement().z() * ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_KNOCKBACK).getValue() * 2.5)));
@@ -434,7 +429,7 @@ public class MutantSkeletonOnEntityTickUpdateProcedure {
 									(lookZ * ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getValue())));
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_punch")), SoundSource.HOSTILE, 1, (float) 0.5);
+									_level.playSound(null, new BlockPos(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_punch")), SoundSource.HOSTILE, 1, (float) 0.5);
 								} else {
 									_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_punch")), SoundSource.HOSTILE, 1, (float) 0.5, false);
 								}
@@ -444,12 +439,11 @@ public class MutantSkeletonOnEntityTickUpdateProcedure {
 							{
 								final Vec3 _center = new Vec3((x + lookX * entity.getBbWidth()), (y + entity.getBbWidth()), (z + lookZ * entity.getBbWidth()));
 								List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate((2 * entity.getBbWidth()) / 2d), e -> true).stream()
-										.sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+										.sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).collect(Collectors.toList());
 								for (Entity entityiterator : _entfound) {
 									if (!(entity == entityiterator)) {
 										entityiterator.invulnerableTime = 0;
-										entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity),
-												(float) (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue() * dmgMul));
+										entityiterator.hurt(new EntityDamageSource("generic", entity), (float) (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue() * dmgMul));
 										entityiterator.setDeltaMovement(new Vec3((entity.getDeltaMovement().x() * ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_KNOCKBACK).getValue() * 2.5),
 												(entity.getDeltaMovement().y()), (entity.getDeltaMovement().z() * ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_KNOCKBACK).getValue() * 2.5)));
 									}
@@ -458,11 +452,10 @@ public class MutantSkeletonOnEntityTickUpdateProcedure {
 							{
 								final Vec3 _center = new Vec3((x + lookX * entity.getBbWidth()), (y + 2 * entity.getBbWidth()), (z + lookZ * entity.getBbWidth()));
 								List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate((2 * entity.getBbWidth()) / 2d), e -> true).stream()
-										.sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+										.sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).collect(Collectors.toList());
 								for (Entity entityiterator : _entfound) {
 									if (!(entity == entityiterator)) {
-										entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity),
-												(float) (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue() * dmgMul));
+										entityiterator.hurt(new EntityDamageSource("generic", entity), (float) (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue() * dmgMul));
 										entityiterator.setDeltaMovement(new Vec3((entity.getDeltaMovement().x() * ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_KNOCKBACK).getValue() * 2.5),
 												(entity.getDeltaMovement().y()), (entity.getDeltaMovement().z() * ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_KNOCKBACK).getValue() * 2.5)));
 									}
@@ -493,7 +486,7 @@ public class MutantSkeletonOnEntityTickUpdateProcedure {
 							attackProgress = 2;
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_avoid")), SoundSource.HOSTILE, 1, 1);
+									_level.playSound(null, new BlockPos(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_avoid")), SoundSource.HOSTILE, 1, 1);
 								} else {
 									_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_avoid")), SoundSource.HOSTILE, 1, 1, false);
 								}
@@ -559,7 +552,7 @@ public class MutantSkeletonOnEntityTickUpdateProcedure {
 							attackProgress = 3;
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_punch")), SoundSource.HOSTILE, 1, (float) 0.7);
+									_level.playSound(null, new BlockPos(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_punch")), SoundSource.HOSTILE, 1, (float) 0.7);
 								} else {
 									_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_punch")), SoundSource.HOSTILE, 1, (float) 0.7, false);
 								}
@@ -567,12 +560,11 @@ public class MutantSkeletonOnEntityTickUpdateProcedure {
 							{
 								final Vec3 _center = new Vec3((x + lookX * entity.getBbWidth() * 1.3), (y + 1.25 * entity.getBbWidth()), (z + lookZ * entity.getBbWidth() * 1.3));
 								List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate((2.5 * entity.getBbWidth()) / 2d), e -> true).stream()
-										.sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+										.sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).collect(Collectors.toList());
 								for (Entity entityiterator : _entfound) {
 									if (!(entity == entityiterator)) {
 										entityiterator.invulnerableTime = 0;
-										entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity),
-												(float) (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue() * dmgMul));
+										entityiterator.hurt(new EntityDamageSource("generic", entity), (float) (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue() * dmgMul));
 										entityiterator.setDeltaMovement(new Vec3((lookX * 4 * ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getValue()),
 												(entity.getDeltaMovement().y() + ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getValue()),
 												(lookZ * 4 * ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getValue())));

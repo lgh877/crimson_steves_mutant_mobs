@@ -8,11 +8,11 @@
       "registry_name": "mutant_skeleton",
       "metadata": {
         "files": [
-          "src/main/resources/assets/crimsonsteves_mutant_mobs/models/item/mutant_skeleton_spawn_egg.json",
-          "src/main/java/net/crimsonsteve/simplemutantmobs/client/renderer/MutantSkeletonRenderer.java",
           "src/main/resources/data/crimsonsteves_mutant_mobs/forge/biome_modifier/mutant_skeleton_biome_modifier.json",
+          "src/main/resources/assets/crimsonsteves_mutant_mobs/models/item/mutant_skeleton_spawn_egg.json",
+          "src/main/java/net/crimsonsteve/simplemutantmobs/entity/MutantSkeletonEntity.java",
           "src/main/java/net/crimsonsteve/simplemutantmobs/entity/model/MutantSkeletonModel.java",
-          "src/main/java/net/crimsonsteve/simplemutantmobs/entity/MutantSkeletonEntity.java"
+          "src/main/java/net/crimsonsteve/simplemutantmobs/client/renderer/MutantSkeletonRenderer.java"
         ]
       },
       "path": "~/mutantskeleton"
@@ -520,10 +520,10 @@
       "subtitles.mutant_skeleton_smash": "Stunt skeleton smashes",
       "subtitles.mutant_skeleton_avoid": "Stunt skeleton leaps",
       "subtitles.mutant_skeleton_death": "Stunt skeleton collapses",
-      "entity.crimsonsteves_mutant_mobs.mutant_skeleton": "Stunt Skeleton",
+      "entity.crimsonsteves_mutant_mobs.mutant_skeleton": "Mutant Skeleton",
       "subtitles.mutant_skeleton_hurt": "Stunt skeleton gets hurt",
       "subtitles.mutant_skeleton_punch": "Stunt skeleton attacks",
-      "item.crimsonsteves_mutant_mobs.mutant_skeleton_spawn_egg": "Stunt Skeleton Spawn Egg",
+      "item.crimsonsteves_mutant_mobs.mutant_skeleton_spawn_egg": "Mutant Skeleton Spawn Egg",
       "subtitles.mutant_skeleton_idle": "Stunt skeleton idle"
     }
   },
@@ -563,7 +563,7 @@
     "mcreatorDependencies": [
       "geckolib"
     ],
-    "currentGenerator": "forge-1.20.1",
+    "currentGenerator": "forge-1.19.2",
     "credits": "Created using mod maker MCreator - https://mcreator.net/about",
     "modElementsPackage": "net.crimsonsteve.simplemutantmobs"
   },

@@ -11,6 +11,7 @@ import net.minecraft.util.Mth;
 
 import net.crimsonsteve.simplemutantmobs.configuration.CrimsonSteveMutantMobsConfigsConfiguration;
 
+import java.util.stream.Collectors;
 import java.util.List;
 import java.util.Comparator;
 
@@ -20,7 +21,8 @@ public class MutantSkeletonSpawnConditionProcedure {
 		if (CrimsonSteveMutantMobsConfigsConfiguration.MUTANTSKELETONSHOULDSPAWNNEARBYSKELETONS.get()) {
 			{
 				final Vec3 _center = new Vec3(x, y, z);
-				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(20 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(20 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center)))
+						.collect(Collectors.toList());
 				for (Entity entityiterator : _entfound) {
 					if ((ForgeRegistries.ENTITY_TYPES.getKey(entityiterator.getType()).toString()).equals("minecraft:skeleton")) {
 						canSpawn = true;
