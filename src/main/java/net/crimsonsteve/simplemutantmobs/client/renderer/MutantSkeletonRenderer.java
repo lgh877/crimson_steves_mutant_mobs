@@ -25,7 +25,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 public class MutantSkeletonRenderer extends GeoEntityRenderer<MutantSkeletonEntity> {
 	public MutantSkeletonRenderer(EntityRendererProvider.Context renderManager) {
 		super(renderManager, new MutantSkeletonModel());
-		this.shadowRadius = 1f;
 	}
 
 	@Override
@@ -70,6 +69,7 @@ public class MutantSkeletonRenderer extends GeoEntityRenderer<MutantSkeletonEnti
 		double z = entity.getZ();
 		float scale = (float) MutantSkeletonEntityScaleProcedure.execute(entity);
 		stack.scale(scale, scale, scale);
+		this.shadowRadius = scale;
 		return RenderType.entityTranslucent(getTextureLocation(entity));
 	}
 }

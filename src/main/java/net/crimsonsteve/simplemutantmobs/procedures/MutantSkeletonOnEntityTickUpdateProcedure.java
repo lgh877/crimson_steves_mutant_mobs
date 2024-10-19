@@ -121,9 +121,19 @@ public class MutantSkeletonOnEntityTickUpdateProcedure {
 				}
 			}
 		}
-		if (world.isClientSide() && entity.isOnGround() && (entity instanceof MutantSkeletonEntity _datEntI ? _datEntI.getEntityData().get(MutantSkeletonEntity.DATA_attackType) : 0) == 0) {
-			if (!entity.isSprinting()) {
-				if (entity.tickCount % 15 == 1 && GetDistanceToTargetFlatProcedure.execute(0, entity.getDeltaMovement().x(), 0, entity.getDeltaMovement().z()) > 0.01) {
+		if (!world.isClientSide()) {
+			if (entity.isOnGround() && (entity instanceof MutantSkeletonEntity _datEntI ? _datEntI.getEntityData().get(MutantSkeletonEntity.DATA_attackType) : 0) == 0) {
+				if (!entity.isSprinting()) {
+					if (entity.tickCount % 15 == 1 && GetDistanceToTargetFlatProcedure.execute(0, entity.getDeltaMovement().x(), 0, entity.getDeltaMovement().z()) > 0.01) {
+						if (world instanceof Level _level) {
+							if (!_level.isClientSide()) {
+								_level.playSound(null, new BlockPos(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_step")), SoundSource.HOSTILE, (float) 0.25, 1);
+							} else {
+								_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_step")), SoundSource.HOSTILE, (float) 0.25, 1, false);
+							}
+						}
+					}
+				} else if (entity.tickCount % 6 == 1 && GetDistanceToTargetFlatProcedure.execute(0, entity.getDeltaMovement().x(), 0, entity.getDeltaMovement().z()) > 0.01) {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
 							_level.playSound(null, new BlockPos(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_step")), SoundSource.HOSTILE, (float) 0.25, 1);
@@ -132,17 +142,7 @@ public class MutantSkeletonOnEntityTickUpdateProcedure {
 						}
 					}
 				}
-			} else if (entity.tickCount % 6 == 1 && GetDistanceToTargetFlatProcedure.execute(0, entity.getDeltaMovement().x(), 0, entity.getDeltaMovement().z()) > 0.01) {
-				if (world instanceof Level _level) {
-					if (!_level.isClientSide()) {
-						_level.playSound(null, new BlockPos(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_step")), SoundSource.HOSTILE, (float) 0.25, 1);
-					} else {
-						_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("crimsonsteves_mutant_mobs:mutant_skeleton_step")), SoundSource.HOSTILE, (float) 0.25, 1, false);
-					}
-				}
 			}
-		}
-		if (!world.isClientSide()) {
 			if (entity.isAlive()) {
 				if ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) < (entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) * 0.5) {
 					entity.setSprinting(true);
@@ -308,17 +308,14 @@ public class MutantSkeletonOnEntityTickUpdateProcedure {
 									_entity.yHeadRotO = _entity.getYRot();
 								}
 							}
+							random = ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getValue();
 							if (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null)) {
 								target = entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null;
-								random = ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getValue();
 								dashPower = Math.min(Math.sqrt(Math.max(GetDistanceToTargetFlatProcedure.execute(x, target.getX(), z, target.getZ()) - (target.getBbWidth() + entity.getBbWidth()) / 2, 0)), 12);
-								jumpPower = Math.sqrt(Math.max(target.getY() - entity.getY(), 0));
-								if (jumpPower < random * 8) {
-									jumpPower = random * 8;
-								}
+								jumpPower = Math.max(Math.sqrt(Math.max(target.getY() - entity.getY(), 0)), random * 5);
 							} else {
 								dashPower = 2;
-								jumpPower = random * 8;
+								jumpPower = random * 5;
 							}
 							entity.setDeltaMovement(new Vec3((lookX * dashPower), jumpPower, (lookZ * dashPower)));
 							particleSettings = attackType - 2;

@@ -419,6 +419,80 @@
           "src/main/java/net/crimsonsteve/simplemutantmobs/MutantSkeletonMoveControl.java"
         ]
       }
+    },
+    {
+      "name": "CalculateYawSqr",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "calculate_yaw_sqr",
+      "metadata": {
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/CalculateYawSqrProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "x0",
+            "type": "number"
+          },
+          {
+            "name": "x1",
+            "type": "number"
+          },
+          {
+            "name": "z0",
+            "type": "number"
+          },
+          {
+            "name": "z1",
+            "type": "number"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MutantSkeletonEntityIsHurt",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "mutant_skeleton_entity_is_hurt",
+      "metadata": {
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/MutantSkeletonEntityIsHurtProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          }
+        ]
+      },
+      "path": "~/mutantskeleton"
+    },
+    {
+      "name": "CustomMathHelper",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "custom_math_helper",
+      "metadata": {
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/CustomMathHelper.java"
+        ]
+      }
     }
   ],
   "variable_elements": [],
@@ -551,7 +625,7 @@
   "workspaceSettings": {
     "modid": "crimsonsteves_mutant_mobs",
     "modName": "crimsonsteves_mutant_mobs",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "author": "Crimson Steve, MCreator",
     "websiteURL": "https://mcreator.net",
     "license": "All Rights Reserved",

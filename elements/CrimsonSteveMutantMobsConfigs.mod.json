@@ -15,7 +15,7 @@
               "value": ""
             },
             "logicField": 0,
-            "numberField": 100.0,
+            "numberField": 50.0,
             "textDefault": "",
             "comment": "Controls how much the mutant skeletons should be spawned. The spawnrate gets lower as the rolls value is larger.",
             "vardisplay": "spawnRolls",

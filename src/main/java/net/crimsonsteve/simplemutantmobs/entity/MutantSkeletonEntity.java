@@ -55,6 +55,7 @@ import net.crimsonsteve.simplemutantmobs.procedures.MutantSkeletonSpawnCondition
 import net.crimsonsteve.simplemutantmobs.procedures.MutantSkeletonOnInitialEntitySpawnProcedure;
 import net.crimsonsteve.simplemutantmobs.procedures.MutantSkeletonOnEntityTickUpdateProcedure;
 import net.crimsonsteve.simplemutantmobs.procedures.MutantSkeletonEntityScaleProcedure;
+import net.crimsonsteve.simplemutantmobs.procedures.MutantSkeletonEntityIsHurtProcedure;
 import net.crimsonsteve.simplemutantmobs.init.CrimsonstevesMutantMobsModEntities;
 import net.crimsonsteve.simplemutantmobs.MutantSkeletonMoveControl;
 
@@ -68,6 +69,7 @@ public class MutantSkeletonEntity extends Monster implements IAnimatable {
 	public static final EntityDataAccessor<Integer> DATA_attackProgress = SynchedEntityData.defineId(MutantSkeletonEntity.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> DATA_particleSettings = SynchedEntityData.defineId(MutantSkeletonEntity.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> DATA_scale = SynchedEntityData.defineId(MutantSkeletonEntity.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> DATA_damagedDirection = SynchedEntityData.defineId(MutantSkeletonEntity.class, EntityDataSerializers.INT);
 	private AnimationFactory factory = GeckoLibUtil.createFactory(this);
 	private boolean swinging;
 	private boolean lastloop;
@@ -83,7 +85,7 @@ public class MutantSkeletonEntity extends Monster implements IAnimatable {
 		xpReward = 0;
 		setNoAi(false);
 		maxUpStep = 1.5f;
-		this.moveControl = new MutantSkeletonMoveControl(this);
+		moveControl = new MutantSkeletonMoveControl(this);
 	}
 
 	@Override
@@ -96,6 +98,7 @@ public class MutantSkeletonEntity extends Monster implements IAnimatable {
 		this.entityData.define(DATA_attackProgress, 0);
 		this.entityData.define(DATA_particleSettings, 0);
 		this.entityData.define(DATA_scale, 10);
+		this.entityData.define(DATA_damagedDirection, 0);
 	}
 
 	public void setTexture(String texture) {
@@ -211,6 +214,7 @@ public class MutantSkeletonEntity extends Monster implements IAnimatable {
 
 	@Override
 	public boolean hurt(DamageSource source, float amount) {
+		MutantSkeletonEntityIsHurtProcedure.execute(this.getX(), this.getZ(), this, source.getEntity());
 		if (source == DamageSource.FALL)
 			return false;
 		return super.hurt(source, amount);
@@ -231,6 +235,7 @@ public class MutantSkeletonEntity extends Monster implements IAnimatable {
 		compound.putInt("DataattackProgress", this.entityData.get(DATA_attackProgress));
 		compound.putInt("DataparticleSettings", this.entityData.get(DATA_particleSettings));
 		compound.putInt("Datascale", this.entityData.get(DATA_scale));
+		compound.putInt("DatadamagedDirection", this.entityData.get(DATA_damagedDirection));
 	}
 
 	@Override
@@ -246,6 +251,8 @@ public class MutantSkeletonEntity extends Monster implements IAnimatable {
 			this.entityData.set(DATA_particleSettings, compound.getInt("DataparticleSettings"));
 		if (compound.contains("Datascale"))
 			this.entityData.set(DATA_scale, compound.getInt("Datascale"));
+		if (compound.contains("DatadamagedDirection"))
+			this.entityData.set(DATA_damagedDirection, compound.getInt("DatadamagedDirection"));
 	}
 
 	@Override

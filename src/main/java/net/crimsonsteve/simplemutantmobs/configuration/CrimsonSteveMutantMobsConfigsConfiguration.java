@@ -10,7 +10,7 @@ public class CrimsonSteveMutantMobsConfigsConfiguration {
 	public static final ForgeConfigSpec.ConfigValue<Double> MUTANTSKELETONSCALE;
 	static {
 		BUILDER.push("mutantSkeleton");
-		MUTANTSKELETONSPAWNROLLS = BUILDER.define("spawnRolls", (double) 100);
+		MUTANTSKELETONSPAWNROLLS = BUILDER.define("spawnRolls", (double) 50);
 		MUTANTSKELETONSHOULDSPAWNNEARBYSKELETONS = BUILDER.define("shouldSpawnNearbySkeletons", true);
 		MUTANTSKELETONSCALE = BUILDER.define("scale", (double) 1);
 		BUILDER.pop();
