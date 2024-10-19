@@ -17,6 +17,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.FriendlyByteBuf;
 
+import net.crimsonsteve.simplemutantmobs.init.CrimsonstevesMutantMobsModTabs;
 import net.crimsonsteve.simplemutantmobs.init.CrimsonstevesMutantMobsModSounds;
 import net.crimsonsteve.simplemutantmobs.init.CrimsonstevesMutantMobsModItems;
 import net.crimsonsteve.simplemutantmobs.init.CrimsonstevesMutantMobsModEntities;
@@ -39,12 +40,13 @@ public class CrimsonstevesMutantMobsMod {
 		// Start of user code block mod constructor
 		// End of user code block mod constructor
 		MinecraftForge.EVENT_BUS.register(this);
-
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		CrimsonstevesMutantMobsModSounds.REGISTRY.register(bus);
 
 		CrimsonstevesMutantMobsModItems.REGISTRY.register(bus);
 		CrimsonstevesMutantMobsModEntities.REGISTRY.register(bus);
+
+		CrimsonstevesMutantMobsModTabs.REGISTRY.register(bus);
 
 		// Start of user code block mod init
 		// End of user code block mod init

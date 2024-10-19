@@ -1,15 +1,14 @@
 
 package net.crimsonsteve.simplemutantmobs.entity;
 
-import software.bernie.geckolib3.util.GeckoLibUtil;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib.util.GeckoLibUtil;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animatable.GeoEntity;
 
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.network.PlayMessages;
@@ -40,6 +39,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.sounds.SoundEvent;
@@ -47,6 +47,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.nbt.CompoundTag;
 
@@ -61,7 +62,7 @@ import net.crimsonsteve.simplemutantmobs.MutantSkeletonMoveControl;
 
 import javax.annotation.Nullable;
 
-public class MutantSkeletonEntity extends Monster implements IAnimatable {
+public class MutantSkeletonEntity extends Monster implements GeoEntity {
 	public static final EntityDataAccessor<Boolean> SHOOT = SynchedEntityData.defineId(MutantSkeletonEntity.class, EntityDataSerializers.BOOLEAN);
 	public static final EntityDataAccessor<String> ANIMATION = SynchedEntityData.defineId(MutantSkeletonEntity.class, EntityDataSerializers.STRING);
 	public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.defineId(MutantSkeletonEntity.class, EntityDataSerializers.STRING);
@@ -70,7 +71,7 @@ public class MutantSkeletonEntity extends Monster implements IAnimatable {
 	public static final EntityDataAccessor<Integer> DATA_particleSettings = SynchedEntityData.defineId(MutantSkeletonEntity.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> DATA_scale = SynchedEntityData.defineId(MutantSkeletonEntity.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> DATA_damagedDirection = SynchedEntityData.defineId(MutantSkeletonEntity.class, EntityDataSerializers.INT);
-	private AnimationFactory factory = GeckoLibUtil.createFactory(this);
+	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	private boolean swinging;
 	private boolean lastloop;
 	private long lastSwing;
@@ -84,8 +85,8 @@ public class MutantSkeletonEntity extends Monster implements IAnimatable {
 		super(type, world);
 		xpReward = 0;
 		setNoAi(false);
-		maxUpStep = 1.5f;
-		moveControl = new MutantSkeletonMoveControl(this);
+		setMaxUpStep(1.5f);
+		this.moveControl = new MutantSkeletonMoveControl(this);
 	}
 
 	@Override
@@ -110,7 +111,7 @@ public class MutantSkeletonEntity extends Monster implements IAnimatable {
 	}
 
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
@@ -133,7 +134,7 @@ public class MutantSkeletonEntity extends Monster implements IAnimatable {
 				double y = MutantSkeletonEntity.this.getY();
 				double z = MutantSkeletonEntity.this.getZ();
 				Entity entity = MutantSkeletonEntity.this;
-				Level world = MutantSkeletonEntity.this.level;
+				Level world = MutantSkeletonEntity.this.level();
 				return super.canUse() && ShouldStopMSkeleProcedure.execute(entity);
 			}
 
@@ -143,7 +144,7 @@ public class MutantSkeletonEntity extends Monster implements IAnimatable {
 				double y = MutantSkeletonEntity.this.getY();
 				double z = MutantSkeletonEntity.this.getZ();
 				Entity entity = MutantSkeletonEntity.this;
-				Level world = MutantSkeletonEntity.this.level;
+				Level world = MutantSkeletonEntity.this.level();
 				return super.canContinueToUse() && ShouldStopMSkeleProcedure.execute(entity);
 			}
 		});
@@ -154,7 +155,7 @@ public class MutantSkeletonEntity extends Monster implements IAnimatable {
 				double y = MutantSkeletonEntity.this.getY();
 				double z = MutantSkeletonEntity.this.getZ();
 				Entity entity = MutantSkeletonEntity.this;
-				Level world = MutantSkeletonEntity.this.level;
+				Level world = MutantSkeletonEntity.this.level();
 				return super.canUse() && ShouldStopMSkeleProcedure.execute(entity);
 			}
 
@@ -164,7 +165,7 @@ public class MutantSkeletonEntity extends Monster implements IAnimatable {
 				double y = MutantSkeletonEntity.this.getY();
 				double z = MutantSkeletonEntity.this.getZ();
 				Entity entity = MutantSkeletonEntity.this;
-				Level world = MutantSkeletonEntity.this.level;
+				Level world = MutantSkeletonEntity.this.level();
 				return super.canContinueToUse() && ShouldStopMSkeleProcedure.execute(entity);
 			}
 		});
@@ -175,7 +176,7 @@ public class MutantSkeletonEntity extends Monster implements IAnimatable {
 				double y = MutantSkeletonEntity.this.getY();
 				double z = MutantSkeletonEntity.this.getZ();
 				Entity entity = MutantSkeletonEntity.this;
-				Level world = MutantSkeletonEntity.this.level;
+				Level world = MutantSkeletonEntity.this.level();
 				return super.canUse() && ShouldStopMSkeleProcedure.execute(entity);
 			}
 
@@ -185,7 +186,7 @@ public class MutantSkeletonEntity extends Monster implements IAnimatable {
 				double y = MutantSkeletonEntity.this.getY();
 				double z = MutantSkeletonEntity.this.getZ();
 				Entity entity = MutantSkeletonEntity.this;
-				Level world = MutantSkeletonEntity.this.level;
+				Level world = MutantSkeletonEntity.this.level();
 				return super.canContinueToUse() && ShouldStopMSkeleProcedure.execute(entity);
 			}
 		});
@@ -215,7 +216,7 @@ public class MutantSkeletonEntity extends Monster implements IAnimatable {
 	@Override
 	public boolean hurt(DamageSource source, float amount) {
 		MutantSkeletonEntityIsHurtProcedure.execute(this.getX(), this.getZ(), this, source.getEntity());
-		if (source == DamageSource.FALL)
+		if (source.is(DamageTypes.FALL))
 			return false;
 		return super.hurt(source, amount);
 	}
@@ -258,14 +259,14 @@ public class MutantSkeletonEntity extends Monster implements IAnimatable {
 	@Override
 	public void baseTick() {
 		super.baseTick();
-		MutantSkeletonOnEntityTickUpdateProcedure.execute(this.level, this.getX(), this.getY(), this.getZ(), this);
+		MutantSkeletonOnEntityTickUpdateProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
 		this.refreshDimensions();
 	}
 
 	@Override
 	public EntityDimensions getDimensions(Pose p_33597_) {
 		Entity entity = this;
-		Level world = this.level;
+		Level world = this.level();
 		double x = this.getX();
 		double y = entity.getY();
 		double z = entity.getZ();
@@ -293,31 +294,32 @@ public class MutantSkeletonEntity extends Monster implements IAnimatable {
 		return builder;
 	}
 
-	private <E extends IAnimatable> PlayState movementPredicate(AnimationEvent<E> event) {
+	private PlayState movementPredicate(AnimationState event) {
 		if (this.animationprocedure.equals("empty")) {
 			if ((event.isMoving() || !(event.getLimbSwingAmount() > -0.15F && event.getLimbSwingAmount() < 0.15F))) {
-				event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.simple_mutant_skeleton.walk", EDefaultLoopTypes.LOOP));
-				return PlayState.CONTINUE;
+				return event.setAndContinue(RawAnimation.begin().thenLoop("animation.simple_mutant_skeleton.walk"));
 			}
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.simple_mutant_skeleton.idle", EDefaultLoopTypes.LOOP));
-			return PlayState.CONTINUE;
+			return event.setAndContinue(RawAnimation.begin().thenLoop("animation.simple_mutant_skeleton.idle"));
 		}
 		return PlayState.STOP;
 	}
 
 	String prevAnim = "empty";
 
-	private <E extends IAnimatable> PlayState procedurePredicate(AnimationEvent<E> event) {
-		if (!this.animationprocedure.equals("empty") && event.getController().getAnimationState().equals(software.bernie.geckolib3.core.AnimationState.Stopped)) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation(this.animationprocedure, EDefaultLoopTypes.PLAY_ONCE));
-			if (event.getController().getAnimationState().equals(software.bernie.geckolib3.core.AnimationState.Stopped)) {
+	private PlayState procedurePredicate(AnimationState event) {
+		if (!animationprocedure.equals("empty") && event.getController().getAnimationState() == AnimationController.State.STOPPED || (!this.animationprocedure.equals(prevAnim) && !this.animationprocedure.equals("empty"))) {
+			if (!this.animationprocedure.equals(prevAnim))
+				event.getController().forceAnimationReset();
+			event.getController().setAnimation(RawAnimation.begin().thenPlay(this.animationprocedure));
+			if (event.getController().getAnimationState() == AnimationController.State.STOPPED) {
 				this.animationprocedure = "empty";
-				event.getController().markNeedsReload();
+				event.getController().forceAnimationReset();
 			}
-		} else if (!animationprocedure.equals(prevAnim)) {
+		} else if (animationprocedure.equals("empty")) {
+			prevAnim = "empty";
 			return PlayState.STOP;
 		}
-		prevAnim = animationprocedure;
+		prevAnim = this.animationprocedure;
 		return PlayState.CONTINUE;
 	}
 
@@ -339,13 +341,13 @@ public class MutantSkeletonEntity extends Monster implements IAnimatable {
 	}
 
 	@Override
-	public void registerControllers(AnimationData data) {
-		data.addAnimationController(new AnimationController<>(this, "movement", 0, this::movementPredicate));
-		data.addAnimationController(new AnimationController<>(this, "procedure", 0, this::procedurePredicate));
+	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
+		data.add(new AnimationController<>(this, "movement", 0, this::movementPredicate));
+		data.add(new AnimationController<>(this, "procedure", 0, this::procedurePredicate));
 	}
 
 	@Override
-	public AnimationFactory getFactory() {
-		return this.factory;
+	public AnimatableInstanceCache getAnimatableInstanceCache() {
+		return this.cache;
 	}
 }

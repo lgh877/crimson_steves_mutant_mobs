@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[43,)"
+loaderVersion="[47,)"
 license="All Rights Reserved"
 
 [[mods]]
@@ -17,7 +17,7 @@ authors="Crimson Steve, MCreator"
 [[dependencies.crimsonsteves_mutant_mobs]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19.2]"
+    versionRange="[1.20.1]"
     ordering="AFTER"
     side="BOTH"
 
