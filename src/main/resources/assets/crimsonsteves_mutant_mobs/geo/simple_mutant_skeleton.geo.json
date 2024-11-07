@@ -195,7 +195,7 @@
 				{
 					"name": "leftFist",
 					"parent": "leftWrist",
-					"pivot": [10.5, 21, 2.5]
+					"pivot": [10.5, 23, 0.5]
 				},
 				{
 					"name": "rightShoulder",
@@ -218,7 +218,7 @@
 				{
 					"name": "rightFist",
 					"parent": "rightWrist",
-					"pivot": [-10.5, 21, 2.5]
+					"pivot": [-10.5, 23, 0.5]
 				},
 				{
 					"name": "neck",

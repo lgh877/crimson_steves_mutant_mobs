@@ -39,7 +39,12 @@
             "varname": "mutantSkeletonShouldSpawnNearbySkeletons",
             "enablecomment": false,
             "stringlist": []
-          },
+          }
+        ]
+      },
+      {
+        "category": "hopkeleton",
+        "entries": [
           {
             "item": {
               "value": ""
@@ -49,11 +54,28 @@
               "value": ""
             },
             "logicField": 0,
-            "numberField": 1.0,
+            "numberField": 10.0,
             "textDefault": "",
-            "comment": "Control the mutant skeleton's size using this config!",
-            "vardisplay": "scale",
-            "varname": "mutantSkeletonScale",
+            "comment": "Controls how much the mob should be spawned. The spawnrate gets lower as the rolls value is larger.",
+            "vardisplay": "spawnRolls",
+            "varname": "hopkeletonSpawnRolls",
+            "enablecomment": false,
+            "stringlist": []
+          },
+          {
+            "item": {
+              "value": ""
+            },
+            "silkTouchMode": 0,
+            "block": {
+              "value": ""
+            },
+            "logicField": 0,
+            "numberField": 0.0,
+            "textDefault": "",
+            "comment": "If this config is enabled, the mob only spawn next to skeletons.",
+            "vardisplay": "shouldSpawnNearbySkeletons",
+            "varname": "hopkeletonShouldSpawnNearbySkeletons",
             "enablecomment": false,
             "stringlist": []
           }

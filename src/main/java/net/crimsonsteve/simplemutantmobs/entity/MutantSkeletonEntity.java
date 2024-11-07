@@ -10,12 +10,13 @@ import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animatable.GeoEntity;
 
+import org.joml.Vector3d;
+
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.network.PlayMessages;
 import net.minecraftforge.network.NetworkHooks;
 
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.npc.Villager;
@@ -30,10 +31,8 @@ import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.MobType;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EntityType;
@@ -41,7 +40,6 @@ import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.DifficultyInstance;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -53,14 +51,10 @@ import net.minecraft.nbt.CompoundTag;
 
 import net.crimsonsteve.simplemutantmobs.procedures.ShouldStopMSkeleProcedure;
 import net.crimsonsteve.simplemutantmobs.procedures.MutantSkeletonSpawnConditionProcedure;
-import net.crimsonsteve.simplemutantmobs.procedures.MutantSkeletonOnInitialEntitySpawnProcedure;
 import net.crimsonsteve.simplemutantmobs.procedures.MutantSkeletonOnEntityTickUpdateProcedure;
-import net.crimsonsteve.simplemutantmobs.procedures.MutantSkeletonEntityScaleProcedure;
 import net.crimsonsteve.simplemutantmobs.procedures.MutantSkeletonEntityIsHurtProcedure;
 import net.crimsonsteve.simplemutantmobs.init.CrimsonstevesMutantMobsModEntities;
 import net.crimsonsteve.simplemutantmobs.MutantSkeletonMoveControl;
-
-import javax.annotation.Nullable;
 
 public class MutantSkeletonEntity extends Monster implements GeoEntity {
 	public static final EntityDataAccessor<Boolean> SHOOT = SynchedEntityData.defineId(MutantSkeletonEntity.class, EntityDataSerializers.BOOLEAN);
@@ -69,13 +63,13 @@ public class MutantSkeletonEntity extends Monster implements GeoEntity {
 	public static final EntityDataAccessor<Integer> DATA_attackType = SynchedEntityData.defineId(MutantSkeletonEntity.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> DATA_attackProgress = SynchedEntityData.defineId(MutantSkeletonEntity.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> DATA_particleSettings = SynchedEntityData.defineId(MutantSkeletonEntity.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> DATA_scale = SynchedEntityData.defineId(MutantSkeletonEntity.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> DATA_damagedDirection = SynchedEntityData.defineId(MutantSkeletonEntity.class, EntityDataSerializers.INT);
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	private boolean swinging;
 	private boolean lastloop;
 	private long lastSwing;
 	public String animationprocedure = "empty";
+	public Vector3d leftFist, rightFist, leftArm, rightArm;
 
 	public MutantSkeletonEntity(PlayMessages.SpawnEntity packet, Level world) {
 		this(CrimsonstevesMutantMobsModEntities.MUTANT_SKELETON.get(), world);
@@ -86,7 +80,7 @@ public class MutantSkeletonEntity extends Monster implements GeoEntity {
 		xpReward = 0;
 		setNoAi(false);
 		setMaxUpStep(1.5f);
-		this.moveControl = new MutantSkeletonMoveControl(this);
+		moveControl = new MutantSkeletonMoveControl(this);
 	}
 
 	@Override
@@ -98,7 +92,6 @@ public class MutantSkeletonEntity extends Monster implements GeoEntity {
 		this.entityData.define(DATA_attackType, 0);
 		this.entityData.define(DATA_attackProgress, 0);
 		this.entityData.define(DATA_particleSettings, 0);
-		this.entityData.define(DATA_scale, 10);
 		this.entityData.define(DATA_damagedDirection, 0);
 	}
 
@@ -222,20 +215,12 @@ public class MutantSkeletonEntity extends Monster implements GeoEntity {
 	}
 
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData livingdata, @Nullable CompoundTag tag) {
-		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-		MutantSkeletonOnInitialEntitySpawnProcedure.execute(this);
-		return retval;
-	}
-
-	@Override
 	public void addAdditionalSaveData(CompoundTag compound) {
 		super.addAdditionalSaveData(compound);
 		compound.putString("Texture", this.getTexture());
 		compound.putInt("DataattackType", this.entityData.get(DATA_attackType));
 		compound.putInt("DataattackProgress", this.entityData.get(DATA_attackProgress));
 		compound.putInt("DataparticleSettings", this.entityData.get(DATA_particleSettings));
-		compound.putInt("Datascale", this.entityData.get(DATA_scale));
 		compound.putInt("DatadamagedDirection", this.entityData.get(DATA_damagedDirection));
 	}
 
@@ -250,8 +235,6 @@ public class MutantSkeletonEntity extends Monster implements GeoEntity {
 			this.entityData.set(DATA_attackProgress, compound.getInt("DataattackProgress"));
 		if (compound.contains("DataparticleSettings"))
 			this.entityData.set(DATA_particleSettings, compound.getInt("DataparticleSettings"));
-		if (compound.contains("Datascale"))
-			this.entityData.set(DATA_scale, compound.getInt("Datascale"));
 		if (compound.contains("DatadamagedDirection"))
 			this.entityData.set(DATA_damagedDirection, compound.getInt("DatadamagedDirection"));
 	}
@@ -265,12 +248,7 @@ public class MutantSkeletonEntity extends Monster implements GeoEntity {
 
 	@Override
 	public EntityDimensions getDimensions(Pose p_33597_) {
-		Entity entity = this;
-		Level world = this.level();
-		double x = this.getX();
-		double y = entity.getY();
-		double z = entity.getZ();
-		return super.getDimensions(p_33597_).scale((float) MutantSkeletonEntityScaleProcedure.execute(entity));
+		return super.getDimensions(p_33597_).scale((float) 1);
 	}
 
 	public static void init() {

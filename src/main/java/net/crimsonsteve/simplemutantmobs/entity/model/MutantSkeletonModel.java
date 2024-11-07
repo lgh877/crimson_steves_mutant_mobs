@@ -43,8 +43,9 @@ public class MutantSkeletonModel extends GeoModel<MutantSkeletonEntity> {
 		CoreGeoBone upperBody = this.getAnimationProcessor().getBone("upperBody");
 		if (animatable.hurtTime > 0) {
 			Vec3 hurtVec = CustomMathHelper.calculateViewVector(0, animatable.getEntityData().get(MutantSkeletonEntity.DATA_damagedDirection));
-			float value = Mth.sin((animatable.hurtTime - partialTicks) * (float) Math.PI / 10);
+			float value = (animatable.hurtTime - partialTicks) / 10;
 			value = value * value * value;
+			value = Mth.sin(value * (float) Math.PI);
 			//value = 1 - value;
 			lowerBody.setRotX(lowerBody.getRotX() + (float) (value * hurtVec.z() / 4));
 			lowerBody.setRotZ(lowerBody.getRotZ() - (float) (value * hurtVec.x() / 4));

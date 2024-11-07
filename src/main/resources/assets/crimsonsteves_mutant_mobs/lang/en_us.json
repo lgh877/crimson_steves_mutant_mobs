@@ -1,11 +1,14 @@
 {
-  "subtitles.mutant_skeleton_step": "Stunt skeleton steps",
-  "subtitles.mutant_skeleton_smash": "Stunt skeleton smashes",
+  "attribute.crimsonsteves_mutant_mobs.action_state": "Action State",
   "subtitles.mutant_skeleton_avoid": "Stunt skeleton leaps",
   "subtitles.mutant_skeleton_death": "Stunt skeleton collapses",
-  "entity.crimsonsteves_mutant_mobs.mutant_skeleton": "Mutant Skeleton",
+  "entity.crimsonsteves_mutant_mobs.mutant_skeleton": "Stunt Skeleton",
   "subtitles.mutant_skeleton_hurt": "Stunt skeleton gets hurt",
   "subtitles.mutant_skeleton_punch": "Stunt skeleton attacks",
-  "item.crimsonsteves_mutant_mobs.mutant_skeleton_spawn_egg": "Mutant Skeleton Spawn Egg",
-  "subtitles.mutant_skeleton_idle": "Stunt skeleton idle"
+  "item.crimsonsteves_mutant_mobs.hopkeleton_spawn_egg": "Hopkeleton Spawn Egg",
+  "subtitles.mutant_skeleton_idle": "Stunt skeleton idle",
+  "subtitles.mutant_skeleton_step": "Stunt skeleton steps",
+  "subtitles.mutant_skeleton_smash": "Stunt skeleton smashes",
+  "item.crimsonsteves_mutant_mobs.mutant_skeleton_spawn_egg": "Stunt Skeleton Spawn Egg",
+  "entity.crimsonsteves_mutant_mobs.hopkeleton": "Hopkeleton"
 }

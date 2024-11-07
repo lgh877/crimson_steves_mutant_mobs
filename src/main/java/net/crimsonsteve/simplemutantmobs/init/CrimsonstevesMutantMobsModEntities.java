@@ -17,6 +17,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Entity;
 
 import net.crimsonsteve.simplemutantmobs.entity.MutantSkeletonEntity;
+import net.crimsonsteve.simplemutantmobs.entity.HopkeletonEntity;
 import net.crimsonsteve.simplemutantmobs.CrimsonstevesMutantMobsMod;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -26,6 +27,10 @@ public class CrimsonstevesMutantMobsModEntities {
 			EntityType.Builder.<MutantSkeletonEntity>of(MutantSkeletonEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(MutantSkeletonEntity::new)
 
 					.sized(1.3f, 3.9f));
+	public static final RegistryObject<EntityType<HopkeletonEntity>> HOPKELETON = register("hopkeleton",
+			EntityType.Builder.<HopkeletonEntity>of(HopkeletonEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(HopkeletonEntity::new)
+
+					.sized(0.6f, 2f));
 
 	private static <T extends Entity> RegistryObject<EntityType<T>> register(String registryname, EntityType.Builder<T> entityTypeBuilder) {
 		return REGISTRY.register(registryname, () -> (EntityType<T>) entityTypeBuilder.build(registryname));
@@ -35,11 +40,13 @@ public class CrimsonstevesMutantMobsModEntities {
 	public static void init(FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			MutantSkeletonEntity.init();
+			HopkeletonEntity.init();
 		});
 	}
 
 	@SubscribeEvent
 	public static void registerAttributes(EntityAttributeCreationEvent event) {
 		event.put(MUTANT_SKELETON.get(), MutantSkeletonEntity.createAttributes().build());
+		event.put(HOPKELETON.get(), HopkeletonEntity.createAttributes().build());
 	}
 }

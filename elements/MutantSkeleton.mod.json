@@ -2,17 +2,15 @@
   "_fv": 66,
   "_type": "animatedentity",
   "definition": {
-    "mobName": "Mutant Skeleton",
+    "mobName": "Stunt Skeleton",
     "mobLabel": "",
     "mobModelTexture": "simple_mutant_skeleton.png",
     "mobModelGlowTexture": "",
     "visualScale": {
-      "fixedValue": 1.0,
-      "name": "MutantSkeletonEntityScale"
+      "fixedValue": 1.0
     },
     "boundingBoxScale": {
-      "fixedValue": 1.0,
-      "name": "MutantSkeletonEntityScale"
+      "fixedValue": 1.0
     },
     "entityDataEntries": [
       {
@@ -35,13 +33,6 @@
         "name": "particleSettings",
         "type": "integer",
         "value": 0
-      },
-      {
-        "min": -2147483648,
-        "max": 2147483647,
-        "name": "scale",
-        "type": "integer",
-        "value": 10
       },
       {
         "min": -2147483648,
@@ -149,9 +140,6 @@
     },
     "onMobTickUpdate": {
       "name": "MutantSkeletonOnEntityTickUpdate"
-    },
-    "onInitialSpawn": {
-      "name": "MutantSkeletonOnInitialEntitySpawn"
     },
     "hasAI": true,
     "aiBase": "(none)",

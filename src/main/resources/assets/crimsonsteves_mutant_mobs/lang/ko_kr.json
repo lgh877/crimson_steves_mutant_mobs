@@ -1,11 +1,14 @@
 {
-  "subtitles.mutant_skeleton_step": "스턴트 스켈레톤이 걷는 소리",
-  "subtitles.mutant_skeleton_smash": "스턴트 스켈레톤이 바닥을 내려치는 소리",
+  "attribute.crimsonsteves_mutant_mobs.action_state": "Action State",
   "subtitles.mutant_skeleton_avoid": "스턴트 스켈레톤이 도약하는 소리",
   "subtitles.mutant_skeleton_death": "스턴트 스켈레톤이 무너지는 소리",
   "entity.crimsonsteves_mutant_mobs.mutant_skeleton": "스턴트 스켈레톤",
   "subtitles.mutant_skeleton_hurt": "스턴트 스켈레톤이 공격받는 소리",
   "subtitles.mutant_skeleton_punch": "스턴트 스켈레톤의 주먹 내지르는 소리",
+  "item.crimsonsteves_mutant_mobs.hopkeleton_spawn_egg": "Hopkeleton Spawn Egg",
+  "subtitles.mutant_skeleton_idle": "스턴트 스켈레톤의 평소 소리",
+  "subtitles.mutant_skeleton_step": "스턴트 스켈레톤이 걷는 소리",
+  "subtitles.mutant_skeleton_smash": "스턴트 스켈레톤이 바닥을 내려치는 소리",
   "item.crimsonsteves_mutant_mobs.mutant_skeleton_spawn_egg": "스턴트 스켈레톤 생성 알",
-  "subtitles.mutant_skeleton_idle": "스턴트 스켈레톤의 평소 소리"
+  "entity.crimsonsteves_mutant_mobs.hopkeleton": "Hopkeleton"
 }

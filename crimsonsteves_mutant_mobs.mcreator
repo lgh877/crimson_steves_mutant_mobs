@@ -15,7 +15,7 @@
           "src/main/java/net/crimsonsteve/simplemutantmobs/client/renderer/MutantSkeletonRenderer.java"
         ]
       },
-      "path": "~/mutantskeleton"
+      "path": "~/mobs/mutantskeleton"
     },
     {
       "name": "MutantSkeletonOnEntityTickUpdate",
@@ -50,7 +50,7 @@
           }
         ]
       },
-      "path": "~/mutantskeleton"
+      "path": "~/mobs/mutantskeleton"
     },
     {
       "name": "ShouldStopMSkele",
@@ -70,7 +70,7 @@
           }
         ]
       },
-      "path": "~/mutantskeleton"
+      "path": "~/mobs/mutantskeleton"
     },
     {
       "name": "CalculateViewVectorX",
@@ -171,7 +171,7 @@
           }
         ]
       },
-      "path": "~/mutantskeleton"
+      "path": "~/mobs/mutantskeleton"
     },
     {
       "name": "MutantSkeletonLootTable",
@@ -184,7 +184,7 @@
           "src/main/resources/data/crimsonsteves_mutant_mobs/loot_tables/entities/mutant_skeleton.json"
         ]
       },
-      "path": "~/mutantskeleton"
+      "path": "~/mobs/mutantskeleton"
     },
     {
       "name": "GetDistanceToTarget",
@@ -270,26 +270,6 @@
       "path": "~/config"
     },
     {
-      "name": "MutantSkeletonEntityScale",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "mutant_skeleton_entity_scale",
-      "metadata": {
-        "return_type": "number",
-        "files": [
-          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/MutantSkeletonEntityScaleProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ]
-      },
-      "path": "~/mutantskeleton"
-    },
-    {
       "name": "MutantSkeletonOnInitialEntitySpawn",
       "type": "procedure",
       "compiles": true,
@@ -299,14 +279,9 @@
         "files": [
           "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/MutantSkeletonOnInitialEntitySpawnProcedure.java"
         ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ]
+        "dependencies": []
       },
-      "path": "~/mutantskeleton"
+      "path": "~/mobs/mutantskeleton"
     },
     {
       "name": "CalculateVectorNormalizeZ",
@@ -480,7 +455,7 @@
           }
         ]
       },
-      "path": "~/mutantskeleton"
+      "path": "~/mobs/mutantskeleton"
     },
     {
       "name": "CustomMathHelper",
@@ -493,6 +468,201 @@
           "src/main/java/net/crimsonsteve/simplemutantmobs/CustomMathHelper.java"
         ]
       }
+    },
+    {
+      "name": "IsEntityInSightMethod",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "is_entity_in_sight_method",
+      "metadata": {
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/IsEntityInSightMethod.java"
+        ]
+      }
+    },
+    {
+      "name": "Hopkeleton",
+      "type": "animatedentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "hopkeleton",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/crimsonsteves_mutant_mobs/forge/biome_modifier/hopkeleton_biome_modifier.json",
+          "src/main/java/net/crimsonsteve/simplemutantmobs/entity/HopkeletonEntity.java",
+          "src/main/resources/assets/crimsonsteves_mutant_mobs/models/item/hopkeleton_spawn_egg.json",
+          "src/main/java/net/crimsonsteve/simplemutantmobs/client/renderer/HopkeletonRenderer.java",
+          "src/main/java/net/crimsonsteve/simplemutantmobs/entity/model/HopkeletonModel.java"
+        ]
+      },
+      "path": "~/mobs/hopkeleton"
+    },
+    {
+      "name": "HopkeletonNaturalEntitySpawningCondition",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "hopkeleton_natural_entity_spawning_condition",
+      "metadata": {
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/HopkeletonNaturalEntitySpawningConditionProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/mobs/hopkeleton"
+    },
+    {
+      "name": "ActionState",
+      "type": "attribute",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "action_state",
+      "metadata": {
+        "files": []
+      }
+    },
+    {
+      "name": "HopkeletonOnEntityTickUpdate",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "hopkeleton_on_entity_tick_update",
+      "metadata": {
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/HopkeletonOnEntityTickUpdateProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/mobs/hopkeleton"
+    },
+    {
+      "name": "HopkeletonAttackTrigger",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "hopkeleton_attack_trigger",
+      "metadata": {
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/HopkeletonAttackTriggerProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/mobs/hopkeleton"
+    },
+    {
+      "name": "HopkeletonAttackProgress",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "hopkeleton_attack_progress",
+      "metadata": {
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/HopkeletonAttackProgressProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/mobs/hopkeleton"
+    },
+    {
+      "name": "IsInAction",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_in_action",
+      "metadata": {
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/IsInActionProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/mobs"
+    },
+    {
+      "name": "HopkeletonLootTable",
+      "type": "loottable",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "hopkeleton_loot_table",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/crimsonsteves_mutant_mobs/loot_tables/entities/hopkeleton.json"
+        ]
+      },
+      "path": "~/mobs/hopkeleton"
     }
   ],
   "variable_elements": [],
@@ -575,50 +745,70 @@
       "subtitle": "Mutant skeleton collapses"
     }
   ],
-  "tag_elements": {},
+  "tag_elements": {
+    "ENTITIES:minecraft:skeletons": [
+      "CUSTOM:Hopkeleton",
+      "CUSTOM:MutantSkeleton"
+    ]
+  },
   "tab_element_order": {},
   "language_map": {
     "ko_kr": {
-      "subtitles.mutant_skeleton_step": "스턴트 스켈레톤이 걷는 소리",
-      "subtitles.mutant_skeleton_smash": "스턴트 스켈레톤이 바닥을 내려치는 소리",
+      "attribute.crimsonsteves_mutant_mobs.action_state": "Action State",
       "subtitles.mutant_skeleton_avoid": "스턴트 스켈레톤이 도약하는 소리",
       "subtitles.mutant_skeleton_death": "스턴트 스켈레톤이 무너지는 소리",
       "entity.crimsonsteves_mutant_mobs.mutant_skeleton": "스턴트 스켈레톤",
       "subtitles.mutant_skeleton_hurt": "스턴트 스켈레톤이 공격받는 소리",
       "subtitles.mutant_skeleton_punch": "스턴트 스켈레톤의 주먹 내지르는 소리",
+      "item.crimsonsteves_mutant_mobs.hopkeleton_spawn_egg": "Hopkeleton Spawn Egg",
+      "subtitles.mutant_skeleton_idle": "스턴트 스켈레톤의 평소 소리",
+      "subtitles.mutant_skeleton_step": "스턴트 스켈레톤이 걷는 소리",
+      "subtitles.mutant_skeleton_smash": "스턴트 스켈레톤이 바닥을 내려치는 소리",
       "item.crimsonsteves_mutant_mobs.mutant_skeleton_spawn_egg": "스턴트 스켈레톤 생성 알",
-      "subtitles.mutant_skeleton_idle": "스턴트 스켈레톤의 평소 소리"
+      "entity.crimsonsteves_mutant_mobs.hopkeleton": "Hopkeleton"
     },
     "en_us": {
-      "subtitles.mutant_skeleton_step": "Stunt skeleton steps",
-      "subtitles.mutant_skeleton_smash": "Stunt skeleton smashes",
+      "attribute.crimsonsteves_mutant_mobs.action_state": "Action State",
       "subtitles.mutant_skeleton_avoid": "Stunt skeleton leaps",
       "subtitles.mutant_skeleton_death": "Stunt skeleton collapses",
-      "entity.crimsonsteves_mutant_mobs.mutant_skeleton": "Mutant Skeleton",
+      "entity.crimsonsteves_mutant_mobs.mutant_skeleton": "Stunt Skeleton",
       "subtitles.mutant_skeleton_hurt": "Stunt skeleton gets hurt",
       "subtitles.mutant_skeleton_punch": "Stunt skeleton attacks",
-      "item.crimsonsteves_mutant_mobs.mutant_skeleton_spawn_egg": "Mutant Skeleton Spawn Egg",
-      "subtitles.mutant_skeleton_idle": "Stunt skeleton idle"
+      "item.crimsonsteves_mutant_mobs.hopkeleton_spawn_egg": "Hopkeleton Spawn Egg",
+      "subtitles.mutant_skeleton_idle": "Stunt skeleton idle",
+      "subtitles.mutant_skeleton_step": "Stunt skeleton steps",
+      "subtitles.mutant_skeleton_smash": "Stunt skeleton smashes",
+      "item.crimsonsteves_mutant_mobs.mutant_skeleton_spawn_egg": "Stunt Skeleton Spawn Egg",
+      "entity.crimsonsteves_mutant_mobs.hopkeleton": "Hopkeleton"
     }
   },
   "foldersRoot": {
     "name": "~",
     "children": [
       {
-        "name": "mutantskeleton",
-        "children": []
-      },
-      {
-        "name": "tripodzombie",
-        "children": []
-      },
-      {
-        "name": "testmobs",
-        "children": []
-      },
-      {
         "name": "config",
         "children": []
+      },
+      {
+        "name": "mobs",
+        "children": [
+          {
+            "name": "testmobs",
+            "children": []
+          },
+          {
+            "name": "mutantskeleton",
+            "children": []
+          },
+          {
+            "name": "tripodzombie",
+            "children": []
+          },
+          {
+            "name": "hopkeleton",
+            "children": []
+          }
+        ]
       }
     ]
   },

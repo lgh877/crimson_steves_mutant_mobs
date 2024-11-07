@@ -23,6 +23,7 @@ public class CrimsonstevesMutantMobsModTabs {
 	public static void buildTabContentsVanilla(BuildCreativeModeTabContentsEvent tabData) {
 		if (tabData.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
 			tabData.accept(CrimsonstevesMutantMobsModItems.MUTANT_SKELETON_SPAWN_EGG.get());
+			tabData.accept(CrimsonstevesMutantMobsModItems.HOPKELETON_SPAWN_EGG.get());
 		}
 	}
 }
