@@ -731,6 +731,19 @@
         ]
       },
       "path": "~/mobs/hopkeleton"
+    },
+    {
+      "name": "WitheredHopkeletonLootTable",
+      "type": "loottable",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "withered_hopkeleton_loot_table",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/crimsonsteves_mutant_mobs/loot_tables/entities/withered_hopkeleton.json"
+        ]
+      },
+      "path": "~/mobs/hopkeleton"
     }
   ],
   "variable_elements": [],
@@ -899,7 +912,7 @@
     "mcreatorDependencies": [
       "geckolib"
     ],
-    "currentGenerator": "forge-1.20.1",
+    "currentGenerator": "forge-1.19.2",
     "credits": "Created using mod maker MCreator - https://mcreator.net/about",
     "modElementsPackage": "net.crimsonsteve.simplemutantmobs"
   },

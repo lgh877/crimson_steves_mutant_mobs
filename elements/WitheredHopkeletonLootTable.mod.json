@@ -6,7 +6,7 @@
     "pools": [
       {
         "minrolls": 1,
-        "maxrolls": 1,
+        "maxrolls": 4,
         "minbonusrolls": 1,
         "maxbonusrolls": 1,
         "hasbonusrolls": false,
@@ -18,7 +18,21 @@
             },
             "weight": 1,
             "minCount": 0,
-            "maxCount": 3,
+            "maxCount": 1,
+            "minEnchantmentLevel": 0,
+            "maxEnchantmentLevel": 0,
+            "affectedByFortune": true,
+            "explosionDecay": false,
+            "silkTouchMode": 0
+          },
+          {
+            "type": "item",
+            "item": {
+              "value": "Items.COAL#0"
+            },
+            "weight": 1,
+            "minCount": 0,
+            "maxCount": 1,
             "minEnchantmentLevel": 0,
             "maxEnchantmentLevel": 0,
             "affectedByFortune": true,
@@ -37,10 +51,10 @@
           {
             "type": "item",
             "item": {
-              "value": "Blocks.SKULL#0"
+              "value": "Blocks.SKULL#1"
             },
             "weight": 1,
-            "minCount": 0,
+            "minCount": 1,
             "maxCount": 1,
             "minEnchantmentLevel": 0,
             "maxEnchantmentLevel": 0,
@@ -54,7 +68,7 @@
               "value": "Items.BONE"
             },
             "weight": 100,
-            "minCount": 0,
+            "minCount": 1,
             "maxCount": 1,
             "minEnchantmentLevel": 0,
             "maxEnchantmentLevel": 0,
@@ -65,7 +79,7 @@
         ]
       }
     ],
-    "name": "entities/hopkeleton",
+    "name": "entities/withered_hopkeleton",
     "namespace": "mod"
   }
 }

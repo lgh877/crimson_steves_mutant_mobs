@@ -12,7 +12,7 @@ public class HopkeletonAttackTriggerProcedure {
 			return "";
 		String currentAnimation = "";
 		if (((LivingEntity) entity).getAttribute(CrimsonstevesMutantMobsModAttributes.ACTIONSTATE.get()).getBaseValue() == 0) {
-			if (entity.fallDistance == 0 && entity.onGround() && (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null) || Math.random() < 0.03)) {
+			if (entity.fallDistance == 0 && entity.isOnGround() && (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null) || Math.random() < 0.03)) {
 				currentAnimation = "hop_ready";
 				((LivingEntity) entity).getAttribute(CrimsonstevesMutantMobsModAttributes.ACTIONSTATE.get()).setBaseValue(((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null ? 1 : 3));
 				entity.getPersistentData().putDouble("attackProgress", 0);
