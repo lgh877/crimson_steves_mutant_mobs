@@ -24,6 +24,7 @@ public class CrimsonstevesMutantMobsModTabs {
 		if (tabData.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
 			tabData.accept(CrimsonstevesMutantMobsModItems.MUTANT_SKELETON_SPAWN_EGG.get());
 			tabData.accept(CrimsonstevesMutantMobsModItems.HOPKELETON_SPAWN_EGG.get());
+			tabData.accept(CrimsonstevesMutantMobsModItems.WITHERED_HOPKELETON_SPAWN_EGG.get());
 		}
 	}
 }

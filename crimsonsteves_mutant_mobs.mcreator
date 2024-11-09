@@ -485,7 +485,7 @@
       "name": "Hopkeleton",
       "type": "animatedentity",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "hopkeleton",
       "metadata": {
         "files": [
@@ -610,22 +610,6 @@
           {
             "name": "entity",
             "type": "entity"
-          },
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
           }
         ]
       },
@@ -660,6 +644,90 @@
       "metadata": {
         "files": [
           "src/main/resources/data/crimsonsteves_mutant_mobs/loot_tables/entities/hopkeleton.json"
+        ]
+      },
+      "path": "~/mobs/hopkeleton"
+    },
+    {
+      "name": "WitheredHopkeletonOnEntityTickUpdate",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "withered_hopkeleton_on_entity_tick_update",
+      "metadata": {
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/WitheredHopkeletonOnEntityTickUpdateProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/mobs/hopkeleton"
+    },
+    {
+      "name": "WitheredHopkeleton",
+      "type": "animatedentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "withered_hopkeleton",
+      "metadata": {
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/client/renderer/WitheredHopkeletonRenderer.java",
+          "src/main/resources/data/crimsonsteves_mutant_mobs/forge/biome_modifier/withered_hopkeleton_biome_modifier.json",
+          "src/main/java/net/crimsonsteve/simplemutantmobs/entity/model/WitheredHopkeletonModel.java",
+          "src/main/resources/assets/crimsonsteves_mutant_mobs/models/item/withered_hopkeleton_spawn_egg.json",
+          "src/main/java/net/crimsonsteve/simplemutantmobs/entity/WitheredHopkeletonEntity.java"
+        ]
+      },
+      "path": "~/mobs/hopkeleton"
+    },
+    {
+      "name": "WitheredHopkeletonNaturalEntitySpawningCondition",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "withered_hopkeleton_natural_entity_spawning_condition",
+      "metadata": {
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/WitheredHopkeletonNaturalEntitySpawningConditionProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
         ]
       },
       "path": "~/mobs/hopkeleton"
@@ -754,20 +822,23 @@
   "tab_element_order": {},
   "language_map": {
     "ko_kr": {
+      "entity.crimsonsteves_mutant_mobs.withered_hopkeleton": "위더 스켈레통",
       "attribute.crimsonsteves_mutant_mobs.action_state": "Action State",
       "subtitles.mutant_skeleton_avoid": "스턴트 스켈레톤이 도약하는 소리",
       "subtitles.mutant_skeleton_death": "스턴트 스켈레톤이 무너지는 소리",
       "entity.crimsonsteves_mutant_mobs.mutant_skeleton": "스턴트 스켈레톤",
       "subtitles.mutant_skeleton_hurt": "스턴트 스켈레톤이 공격받는 소리",
       "subtitles.mutant_skeleton_punch": "스턴트 스켈레톤의 주먹 내지르는 소리",
-      "item.crimsonsteves_mutant_mobs.hopkeleton_spawn_egg": "Hopkeleton Spawn Egg",
+      "item.crimsonsteves_mutant_mobs.hopkeleton_spawn_egg": "스켈레통 생성 알",
       "subtitles.mutant_skeleton_idle": "스턴트 스켈레톤의 평소 소리",
       "subtitles.mutant_skeleton_step": "스턴트 스켈레톤이 걷는 소리",
       "subtitles.mutant_skeleton_smash": "스턴트 스켈레톤이 바닥을 내려치는 소리",
+      "item.crimsonsteves_mutant_mobs.withered_hopkeleton_spawn_egg": "위더 스켈레통 생성 알",
       "item.crimsonsteves_mutant_mobs.mutant_skeleton_spawn_egg": "스턴트 스켈레톤 생성 알",
-      "entity.crimsonsteves_mutant_mobs.hopkeleton": "Hopkeleton"
+      "entity.crimsonsteves_mutant_mobs.hopkeleton": "스켈레통"
     },
     "en_us": {
+      "entity.crimsonsteves_mutant_mobs.withered_hopkeleton": "Withered Hopkeleton",
       "attribute.crimsonsteves_mutant_mobs.action_state": "Action State",
       "subtitles.mutant_skeleton_avoid": "Stunt skeleton leaps",
       "subtitles.mutant_skeleton_death": "Stunt skeleton collapses",
@@ -778,6 +849,7 @@
       "subtitles.mutant_skeleton_idle": "Stunt skeleton idle",
       "subtitles.mutant_skeleton_step": "Stunt skeleton steps",
       "subtitles.mutant_skeleton_smash": "Stunt skeleton smashes",
+      "item.crimsonsteves_mutant_mobs.withered_hopkeleton_spawn_egg": "Withered Hopkeleton Spawn Egg",
       "item.crimsonsteves_mutant_mobs.mutant_skeleton_spawn_egg": "Stunt Skeleton Spawn Egg",
       "entity.crimsonsteves_mutant_mobs.hopkeleton": "Hopkeleton"
     }
@@ -815,7 +887,7 @@
   "workspaceSettings": {
     "modid": "crimsonsteves_mutant_mobs",
     "modName": "crimsonsteves_mutant_mobs",
-    "version": "1.3.0",
+    "version": "1.4.1",
     "author": "Crimson Steve, MCreator",
     "websiteURL": "https://mcreator.net",
     "license": "All Rights Reserved",

@@ -1,4 +1,5 @@
 {
+  "entity.crimsonsteves_mutant_mobs.withered_hopkeleton": "Withered Hopkeleton",
   "attribute.crimsonsteves_mutant_mobs.action_state": "Action State",
   "subtitles.mutant_skeleton_avoid": "Stunt skeleton leaps",
   "subtitles.mutant_skeleton_death": "Stunt skeleton collapses",
@@ -9,6 +10,7 @@
   "subtitles.mutant_skeleton_idle": "Stunt skeleton idle",
   "subtitles.mutant_skeleton_step": "Stunt skeleton steps",
   "subtitles.mutant_skeleton_smash": "Stunt skeleton smashes",
+  "item.crimsonsteves_mutant_mobs.withered_hopkeleton_spawn_egg": "Withered Hopkeleton Spawn Egg",
   "item.crimsonsteves_mutant_mobs.mutant_skeleton_spawn_egg": "Stunt Skeleton Spawn Egg",
   "entity.crimsonsteves_mutant_mobs.hopkeleton": "Hopkeleton"
 }

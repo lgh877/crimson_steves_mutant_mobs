@@ -2,29 +2,29 @@
   "_fv": 66,
   "_type": "animatedentity",
   "definition": {
-    "mobName": "Hopkeleton",
+    "mobName": "Withered Hopkeleton",
     "mobLabel": "",
-    "mobModelTexture": "skeleton.png",
+    "mobModelTexture": "wither_skeleton.png",
     "mobModelGlowTexture": "",
     "visualScale": {
-      "fixedValue": 1.0
+      "fixedValue": 1.2
     },
     "boundingBoxScale": {
       "fixedValue": 1.0
     },
     "entityDataEntries": [],
-    "modelWidth": 0.6,
-    "modelHeight": 2.0,
-    "modelShadowSize": 0.5,
+    "modelWidth": 0.72,
+    "modelHeight": 2.4,
+    "modelShadowSize": 0.6,
     "mountedYOffset": 0.0,
     "stepHeight": 0.6,
     "hasSpawnEgg": true,
     "spawnEggBaseColor": {
-      "value": -10066330,
+      "value": -16777216,
       "falpha": 0.0
     },
     "spawnEggDotColor": {
-      "value": -3355444,
+      "value": -13291215,
       "falpha": 0.0
     },
     "creativeTabs": [
@@ -63,7 +63,7 @@
     "trackingRange": 64,
     "followRange": 64,
     "health": 30,
-    "xpAmount": 10,
+    "xpAmount": 15,
     "waterMob": false,
     "flyingMob": false,
     "guiBoundTo": "<NONE>",
@@ -75,7 +75,7 @@
     "ridable": false,
     "canControlForward": false,
     "canControlStrafe": false,
-    "immuneToFire": false,
+    "immuneToFire": true,
     "immuneToArrows": false,
     "immuneToFallDamage": true,
     "immuneToCactus": false,
@@ -92,13 +92,13 @@
       "value": ""
     },
     "livingSound": {
-      "value": "entity.skeleton.ambient"
+      "value": "entity.wither_skeleton.ambient"
     },
     "hurtSound": {
-      "value": "entity.skeleton.hurt"
+      "value": "entity.wither_skeleton.hurt"
     },
     "deathSound": {
-      "value": "entity.skeleton.death"
+      "value": "entity.wither_skeleton.death"
     },
     "stepSound": {
       "value": ""
@@ -107,11 +107,11 @@
       "value": ""
     },
     "onMobTickUpdate": {
-      "name": "HopkeletonOnEntityTickUpdate"
+      "name": "WitheredHopkeletonOnEntityTickUpdate"
     },
     "hasAI": true,
     "aiBase": "(none)",
-    "aixml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"aitasks_container\" deletable=\"false\" x=\"40\" y=\"40\"><next><block type=\"attack_with_range\"><field name=\"range\">0</field><field name=\"speed\">0</field><field name=\"longmemory\">FALSE</field><field name=\"condition\">IsInAction,null</field><next><block type=\"attack_action\"><field name=\"callhelp\">TRUE</field><field name=\"condition\">null,null</field><next><block type=\"attack_entity\"><field name=\"insight\">FALSE</field><field name=\"nearby\">FALSE</field><field name=\"entity\">EntityPlayer</field><field name=\"condition\">null,null</field><next><block type=\"attack_entity\"><field name=\"insight\">FALSE</field><field name=\"nearby\">FALSE</field><field name=\"entity\">EntityGolem</field><field name=\"condition\">null,null</field><next><block type=\"attack_entity\"><field name=\"insight\">FALSE</field><field name=\"nearby\">FALSE</field><field name=\"entity\">EntityVillager</field><field name=\"condition\">null,null</field><next><block type=\"wander\"><field name=\"speed\">0</field><field name=\"condition\">IsInAction,null</field><next><block type=\"look_around\"><field name=\"condition\">IsInAction,null</field></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></xml>",
+    "aixml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"aitasks_container\" deletable=\"false\" x=\"40\" y=\"40\"><next><block type=\"attack_with_range\"><field name=\"range\">0</field><field name=\"speed\">0</field><field name=\"longmemory\">FALSE</field><field name=\"condition\">IsInAction,null</field><next><block type=\"attack_entity\"><field name=\"insight\">FALSE</field><field name=\"nearby\">FALSE</field><field name=\"entity\">EntityPlayer</field><field name=\"condition\">null,null</field><next><block type=\"attack_entity\"><field name=\"insight\">FALSE</field><field name=\"nearby\">FALSE</field><field name=\"entity\">EntityGolem</field><field name=\"condition\">null,null</field><next><block type=\"attack_entity\"><field name=\"insight\">FALSE</field><field name=\"nearby\">FALSE</field><field name=\"entity\">EntityVillager</field><field name=\"condition\">null,null</field><next><block type=\"attack_action\"><field name=\"callhelp\">TRUE</field><field name=\"condition\">null,null</field><next><block type=\"wander\"><field name=\"speed\">0</field><field name=\"condition\">IsInAction,null</field><next><block type=\"look_around\"><field name=\"condition\">null,null</field></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></xml>",
     "model": "hopkeleton.geo.json",
     "groupName": "head",
     "animation1": "idle",
@@ -159,13 +159,26 @@
     "spawnThisMob": true,
     "doesDespawnWhenIdle": true,
     "spawningCondition": {
-      "name": "HopkeletonNaturalEntitySpawningCondition"
+      "name": "WitheredHopkeletonNaturalEntitySpawningCondition"
     },
     "spawningProbability": 100,
     "mobSpawningType": "monster",
     "minNumberOfMobsPerGroup": 1,
     "maxNumberOfMobsPerGroup": 1,
-    "restrictionBiomes": [],
+    "restrictionBiomes": [
+      {
+        "value": "nether"
+      },
+      {
+        "value": "crimson_forest"
+      },
+      {
+        "value": "soul_sand_valley"
+      },
+      {
+        "value": "basalt_deltas"
+      }
+    ],
     "spawnInDungeons": false
   }
 }

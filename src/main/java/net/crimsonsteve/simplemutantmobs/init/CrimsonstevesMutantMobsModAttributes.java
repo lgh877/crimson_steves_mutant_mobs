@@ -33,5 +33,6 @@ public class CrimsonstevesMutantMobsModAttributes {
 	public static void addAttributes(EntityAttributeModificationEvent event) {
 		event.add(CrimsonstevesMutantMobsModEntities.HOPKELETON.get(), ACTIONSTATE.get());
 		event.add(CrimsonstevesMutantMobsModEntities.MUTANT_SKELETON.get(), ACTIONSTATE.get());
+		event.add(CrimsonstevesMutantMobsModEntities.WITHERED_HOPKELETON.get(), ACTIONSTATE.get());
 	}
 }

@@ -489,12 +489,12 @@
 				},
 				"leftArm": {
 					"rotation": {
-						"vector": ["-166.444+math.cos(query.life_time*90)*4", -15.09904, "29.1263+math.sin(query.life_time*90)*4"]
+						"vector": ["-126.444+math.cos(query.life_time*90)*4", -15.09904, "29.1263+math.sin(query.life_time*90)*4"]
 					}
 				},
 				"rightArm": {
 					"rotation": {
-						"vector": ["-89.9322+math.sin(query.life_time*90)*4", 9.49445, "-30.86+math.cos(query.life_time*90)*4"]
+						"vector": ["-127.4322+math.sin(query.life_time*90)*4", 9.49445, "-30.86+math.cos(query.life_time*90)*4"]
 					}
 				},
 				"leftLeg1": {

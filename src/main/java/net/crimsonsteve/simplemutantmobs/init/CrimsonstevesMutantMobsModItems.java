@@ -17,6 +17,8 @@ public class CrimsonstevesMutantMobsModItems {
 	public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, CrimsonstevesMutantMobsMod.MODID);
 	public static final RegistryObject<Item> MUTANT_SKELETON_SPAWN_EGG = REGISTRY.register("mutant_skeleton_spawn_egg", () -> new ForgeSpawnEggItem(CrimsonstevesMutantMobsModEntities.MUTANT_SKELETON, -6710887, -10066330, new Item.Properties()));
 	public static final RegistryObject<Item> HOPKELETON_SPAWN_EGG = REGISTRY.register("hopkeleton_spawn_egg", () -> new ForgeSpawnEggItem(CrimsonstevesMutantMobsModEntities.HOPKELETON, -10066330, -3355444, new Item.Properties()));
+	public static final RegistryObject<Item> WITHERED_HOPKELETON_SPAWN_EGG = REGISTRY.register("withered_hopkeleton_spawn_egg",
+			() -> new ForgeSpawnEggItem(CrimsonstevesMutantMobsModEntities.WITHERED_HOPKELETON, -16777216, -13291215, new Item.Properties()));
 	// Start of user code block custom items
 	// End of user code block custom items
 }

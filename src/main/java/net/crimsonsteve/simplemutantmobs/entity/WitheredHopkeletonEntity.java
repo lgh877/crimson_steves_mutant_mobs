@@ -46,28 +46,28 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.nbt.CompoundTag;
 
+import net.crimsonsteve.simplemutantmobs.procedures.WitheredHopkeletonOnEntityTickUpdateProcedure;
+import net.crimsonsteve.simplemutantmobs.procedures.WitheredHopkeletonNaturalEntitySpawningConditionProcedure;
 import net.crimsonsteve.simplemutantmobs.procedures.IsInActionProcedure;
-import net.crimsonsteve.simplemutantmobs.procedures.HopkeletonOnEntityTickUpdateProcedure;
-import net.crimsonsteve.simplemutantmobs.procedures.HopkeletonNaturalEntitySpawningConditionProcedure;
 import net.crimsonsteve.simplemutantmobs.init.CrimsonstevesMutantMobsModEntities;
 
-public class HopkeletonEntity extends Monster implements GeoEntity {
-	public static final EntityDataAccessor<Boolean> SHOOT = SynchedEntityData.defineId(HopkeletonEntity.class, EntityDataSerializers.BOOLEAN);
-	public static final EntityDataAccessor<String> ANIMATION = SynchedEntityData.defineId(HopkeletonEntity.class, EntityDataSerializers.STRING);
-	public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.defineId(HopkeletonEntity.class, EntityDataSerializers.STRING);
+public class WitheredHopkeletonEntity extends Monster implements GeoEntity {
+	public static final EntityDataAccessor<Boolean> SHOOT = SynchedEntityData.defineId(WitheredHopkeletonEntity.class, EntityDataSerializers.BOOLEAN);
+	public static final EntityDataAccessor<String> ANIMATION = SynchedEntityData.defineId(WitheredHopkeletonEntity.class, EntityDataSerializers.STRING);
+	public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.defineId(WitheredHopkeletonEntity.class, EntityDataSerializers.STRING);
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	private boolean swinging;
 	private boolean lastloop;
 	private long lastSwing;
 	public String animationprocedure = "empty";
 
-	public HopkeletonEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(CrimsonstevesMutantMobsModEntities.HOPKELETON.get(), world);
+	public WitheredHopkeletonEntity(PlayMessages.SpawnEntity packet, Level world) {
+		this(CrimsonstevesMutantMobsModEntities.WITHERED_HOPKELETON.get(), world);
 	}
 
-	public HopkeletonEntity(EntityType<HopkeletonEntity> type, Level world) {
+	public WitheredHopkeletonEntity(EntityType<WitheredHopkeletonEntity> type, Level world) {
 		super(type, world);
-		xpReward = 10;
+		xpReward = 15;
 		setNoAi(false);
 		setMaxUpStep(0.6f);
 	}
@@ -77,7 +77,7 @@ public class HopkeletonEntity extends Monster implements GeoEntity {
 		super.defineSynchedData();
 		this.entityData.define(SHOOT, false);
 		this.entityData.define(ANIMATION, "undefined");
-		this.entityData.define(TEXTURE, "skeleton");
+		this.entityData.define(TEXTURE, "wither_skeleton");
 	}
 
 	public void setTexture(String texture) {
@@ -104,40 +104,31 @@ public class HopkeletonEntity extends Monster implements GeoEntity {
 
 			@Override
 			public boolean canUse() {
-				double x = HopkeletonEntity.this.getX();
-				double y = HopkeletonEntity.this.getY();
-				double z = HopkeletonEntity.this.getZ();
-				Entity entity = HopkeletonEntity.this;
-				Level world = HopkeletonEntity.this.level();
+				double x = WitheredHopkeletonEntity.this.getX();
+				double y = WitheredHopkeletonEntity.this.getY();
+				double z = WitheredHopkeletonEntity.this.getZ();
+				Entity entity = WitheredHopkeletonEntity.this;
+				Level world = WitheredHopkeletonEntity.this.level();
 				return super.canUse() && IsInActionProcedure.execute(entity);
 			}
+
 		});
-		this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setAlertOthers());
-		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal(this, Player.class, false, false));
-		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal(this, AbstractGolem.class, false, false));
-		this.targetSelector.addGoal(5, new NearestAttackableTargetGoal(this, Villager.class, false, false));
+		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, Player.class, false, false));
+		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal(this, AbstractGolem.class, false, false));
+		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal(this, Villager.class, false, false));
+		this.targetSelector.addGoal(5, new HurtByTargetGoal(this).setAlertOthers());
 		this.goalSelector.addGoal(6, new RandomStrollGoal(this, 0) {
 			@Override
 			public boolean canUse() {
-				double x = HopkeletonEntity.this.getX();
-				double y = HopkeletonEntity.this.getY();
-				double z = HopkeletonEntity.this.getZ();
-				Entity entity = HopkeletonEntity.this;
-				Level world = HopkeletonEntity.this.level();
+				double x = WitheredHopkeletonEntity.this.getX();
+				double y = WitheredHopkeletonEntity.this.getY();
+				double z = WitheredHopkeletonEntity.this.getZ();
+				Entity entity = WitheredHopkeletonEntity.this;
+				Level world = WitheredHopkeletonEntity.this.level();
 				return super.canUse() && IsInActionProcedure.execute(entity);
 			}
 		});
-		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this) {
-			@Override
-			public boolean canUse() {
-				double x = HopkeletonEntity.this.getX();
-				double y = HopkeletonEntity.this.getY();
-				double z = HopkeletonEntity.this.getZ();
-				Entity entity = HopkeletonEntity.this;
-				Level world = HopkeletonEntity.this.level();
-				return super.canUse() && IsInActionProcedure.execute(entity);
-			}
-		});
+		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
 	}
 
 	@Override
@@ -147,21 +138,23 @@ public class HopkeletonEntity extends Monster implements GeoEntity {
 
 	@Override
 	public SoundEvent getAmbientSound() {
-		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.skeleton.ambient"));
+		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.wither_skeleton.ambient"));
 	}
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
-		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.skeleton.hurt"));
+		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.wither_skeleton.hurt"));
 	}
 
 	@Override
 	public SoundEvent getDeathSound() {
-		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.skeleton.death"));
+		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.wither_skeleton.death"));
 	}
 
 	@Override
 	public boolean hurt(DamageSource source, float amount) {
+		if (source.is(DamageTypes.IN_FIRE))
+			return false;
 		if (source.is(DamageTypes.FALL))
 			return false;
 		if (source.is(DamageTypes.DROWN))
@@ -185,10 +178,7 @@ public class HopkeletonEntity extends Monster implements GeoEntity {
 	@Override
 	public void baseTick() {
 		super.baseTick();
-		if (this.isSunBurnTick()) {
-			this.setSecondsOnFire(8);
-		}
-		HopkeletonOnEntityTickUpdateProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
+		WitheredHopkeletonOnEntityTickUpdateProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
 		this.refreshDimensions();
 	}
 
@@ -198,11 +188,11 @@ public class HopkeletonEntity extends Monster implements GeoEntity {
 	}
 
 	public static void init() {
-		SpawnPlacements.register(CrimsonstevesMutantMobsModEntities.HOPKELETON.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (entityType, world, reason, pos, random) -> {
+		SpawnPlacements.register(CrimsonstevesMutantMobsModEntities.WITHERED_HOPKELETON.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (entityType, world, reason, pos, random) -> {
 			int x = pos.getX();
 			int y = pos.getY();
 			int z = pos.getZ();
-			return HopkeletonNaturalEntitySpawningConditionProcedure.execute(world, x, y, z);
+			return WitheredHopkeletonNaturalEntitySpawningConditionProcedure.execute(world, x, y, z);
 		});
 	}
 
@@ -246,7 +236,7 @@ public class HopkeletonEntity extends Monster implements GeoEntity {
 	protected void tickDeath() {
 		++this.deathTime;
 		if (this.deathTime == 20) {
-			this.remove(HopkeletonEntity.RemovalReason.KILLED);
+			this.remove(WitheredHopkeletonEntity.RemovalReason.KILLED);
 			this.dropExperience();
 		}
 	}

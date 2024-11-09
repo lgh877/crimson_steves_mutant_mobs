@@ -18,16 +18,17 @@ public class HopkeletonAttackTriggerProcedure {
 				entity.getPersistentData().putDouble("attackProgress", 0);
 				entity.getPersistentData().putDouble("attackTicks", 0);
 			}
-			if (entity.fallDistance < entity.getPersistentData().getDouble("prevFallHeight")) {
-				currentAnimation = "land";
-				((LivingEntity) entity).getAttribute(CrimsonstevesMutantMobsModAttributes.ACTIONSTATE.get()).setBaseValue(2);
-				entity.getPersistentData().putDouble("attackProgress", 0);
-				entity.getPersistentData().putDouble("attackTicks", 0);
-			} else if (entity.fallDistance > entity.getPersistentData().getDouble("prevFallHeight")) {
+			if (entity.fallDistance > entity.getPersistentData().getDouble("prevFallHeight")) {
 				currentAnimation = "hop_idle";
 			}
-			entity.getPersistentData().putDouble("prevFallHeight", entity.fallDistance);
 		}
+		if (entity.fallDistance < entity.getPersistentData().getDouble("prevFallHeight")) {
+			currentAnimation = "land";
+			((LivingEntity) entity).getAttribute(CrimsonstevesMutantMobsModAttributes.ACTIONSTATE.get()).setBaseValue(2);
+			entity.getPersistentData().putDouble("attackProgress", 0);
+			entity.getPersistentData().putDouble("attackTicks", 0);
+		}
+		entity.getPersistentData().putDouble("prevFallHeight", entity.fallDistance);
 		return currentAnimation;
 	}
 }

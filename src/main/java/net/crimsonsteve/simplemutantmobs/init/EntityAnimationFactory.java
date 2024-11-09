@@ -4,6 +4,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
+import net.crimsonsteve.simplemutantmobs.entity.WitheredHopkeletonEntity;
 import net.crimsonsteve.simplemutantmobs.entity.MutantSkeletonEntity;
 import net.crimsonsteve.simplemutantmobs.entity.HopkeletonEntity;
 
@@ -20,6 +21,13 @@ public class EntityAnimationFactory {
 				}
 			}
 			if (event.getEntity() instanceof HopkeletonEntity syncable) {
+				String animation = syncable.getSyncedAnimation();
+				if (!animation.equals("undefined")) {
+					syncable.setAnimation("undefined");
+					syncable.animationprocedure = animation;
+				}
+			}
+			if (event.getEntity() instanceof WitheredHopkeletonEntity syncable) {
 				String animation = syncable.getSyncedAnimation();
 				if (!animation.equals("undefined")) {
 					syncable.setAnimation("undefined");

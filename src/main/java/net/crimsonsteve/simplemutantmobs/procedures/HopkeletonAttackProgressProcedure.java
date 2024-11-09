@@ -1,23 +1,15 @@
 package net.crimsonsteve.simplemutantmobs.procedures;
 
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 
 import net.crimsonsteve.simplemutantmobs.init.CrimsonstevesMutantMobsModAttributes;
 
-import java.util.List;
-import java.util.Comparator;
-
 public class HopkeletonAttackProgressProcedure {
-	public static String execute(LevelAccessor world, double x, double y, double z, Entity entity) {
+	public static String execute(Entity entity) {
 		if (entity == null)
 			return "";
 		String currentAnimation = "";
@@ -31,7 +23,7 @@ public class HopkeletonAttackProgressProcedure {
 			} else {
 				currentAnimation = currentAnimation;
 			}
-		} else {
+		} else if (entity.isAlive()) {
 			actionState = ((LivingEntity) entity).getAttribute(CrimsonstevesMutantMobsModAttributes.ACTIONSTATE.get()).getBaseValue();
 			attackProgress = entity.getPersistentData().getDouble("attackProgress");
 			if (actionState == 1) {
@@ -46,19 +38,6 @@ public class HopkeletonAttackProgressProcedure {
 					((LivingEntity) entity).getAttribute(CrimsonstevesMutantMobsModAttributes.ACTIONSTATE.get()).setBaseValue(0);
 				}
 			} else if (actionState == 2) {
-				if (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null)) {
-					{
-						final Vec3 _center = new Vec3(x, (y + entity.getBbWidth() * 0.8), z);
-						List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate((entity.getBbWidth() * 2) / 2d), e -> true).stream()
-								.sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
-						for (Entity entityiterator : _entfound) {
-							if (entityiterator == (entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null)) {
-								entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity),
-										(float) ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue());
-							}
-						}
-					}
-				}
 				if (entity.getPersistentData().getDouble("attackTicks") >= 4) {
 					((LivingEntity) entity).getAttribute(CrimsonstevesMutantMobsModAttributes.ACTIONSTATE.get()).setBaseValue(0);
 				}
@@ -75,11 +54,11 @@ public class HopkeletonAttackProgressProcedure {
 				} else if (attackProgress == 1 && entity.getPersistentData().getDouble("attackTicks") >= 8) {
 					currentAnimation = "hop_attack_idle";
 					attackProgress = 2;
-				} else if (attackProgress == 2 && (entity.getPersistentData().getDouble("attackTicks") >= 16 || entity.onGround() || entity.fallDistance > 0)) {
+				} else if (attackProgress == 2 && (entity.getPersistentData().getDouble("attackTicks") >= 20 || entity.onGround() || entity.fallDistance > 0)) {
 					currentAnimation = "hop_attack_occur";
 					attackProgress = 0;
 					((LivingEntity) entity).getAttribute(CrimsonstevesMutantMobsModAttributes.ACTIONSTATE.get()).setBaseValue(2);
-					entity.getPersistentData().putDouble("attackTicks", 0);
+					entity.getPersistentData().putDouble("attackTicks", (-10));
 					speed = ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getValue();
 					entity.setDeltaMovement(new Vec3((entity.getLookAngle().x * 3 * speed), (Math.min(entity.getLookAngle().y, 0) * 3 * speed), (entity.getLookAngle().z * 3 * speed)));
 				}

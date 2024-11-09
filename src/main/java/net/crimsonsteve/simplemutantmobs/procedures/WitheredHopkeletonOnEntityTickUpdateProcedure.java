@@ -6,22 +6,24 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.core.registries.Registries;
 
 import net.crimsonsteve.simplemutantmobs.init.CrimsonstevesMutantMobsModAttributes;
-import net.crimsonsteve.simplemutantmobs.entity.HopkeletonEntity;
+import net.crimsonsteve.simplemutantmobs.entity.WitheredHopkeletonEntity;
 
 import java.util.List;
 import java.util.Comparator;
 
-public class HopkeletonOnEntityTickUpdateProcedure {
+public class WitheredHopkeletonOnEntityTickUpdateProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
-		String currentAnimation = "";
 		String attackTriggerAnimation = "";
+		String currentAnimation = "";
 		String attackProgressAnimation = "";
 		if (((LivingEntity) entity).getAttribute(CrimsonstevesMutantMobsModAttributes.ACTIONSTATE.get()).getBaseValue() != 0) {
 			if (((LivingEntity) entity).getAttribute(CrimsonstevesMutantMobsModAttributes.ACTIONSTATE.get()).getBaseValue() == 2 && !((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null)) {
@@ -31,6 +33,8 @@ public class HopkeletonOnEntityTickUpdateProcedure {
 							.toList();
 					for (Entity entityiterator : _entfound) {
 						if (entityiterator == (entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null)) {
+							if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
+								_entity.addEffect(new MobEffectInstance(MobEffects.WITHER, 360, 1));
 							entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity),
 									(float) ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue());
 						}
@@ -40,15 +44,15 @@ public class HopkeletonOnEntityTickUpdateProcedure {
 			((LivingEntity) entity).setYRot(entity.getYHeadRot());
 			((LivingEntity) entity).setYBodyRot(entity.getYHeadRot());
 		}
-		currentAnimation = ((HopkeletonEntity) entity).animationprocedure;
+		currentAnimation = ((WitheredHopkeletonEntity) entity).animationprocedure;
 		if (!world.isClientSide()) {
 			attackTriggerAnimation = HopkeletonAttackTriggerProcedure.execute(entity);
 			attackProgressAnimation = HopkeletonAttackProgressProcedure.execute(entity);
 			currentAnimation = !(attackTriggerAnimation).isEmpty() ? attackTriggerAnimation : currentAnimation;
 			currentAnimation = !(attackProgressAnimation).isEmpty() ? attackProgressAnimation : currentAnimation;
 		}
-		if (entity instanceof HopkeletonEntity) {
-			((HopkeletonEntity) entity).setAnimation(currentAnimation);
+		if (entity instanceof WitheredHopkeletonEntity) {
+			((WitheredHopkeletonEntity) entity).setAnimation(currentAnimation);
 		}
 	}
 }
