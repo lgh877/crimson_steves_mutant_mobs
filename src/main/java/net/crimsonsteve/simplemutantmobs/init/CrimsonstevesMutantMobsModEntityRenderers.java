@@ -1,3 +1,4 @@
+
 /*
  *    MCreator note: This file will be REGENERATED on each build.
  */
@@ -9,6 +10,8 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.api.distmarker.Dist;
 
 import net.crimsonsteve.simplemutantmobs.client.renderer.WitheredHopkeletonRenderer;
+import net.crimsonsteve.simplemutantmobs.client.renderer.WitheredBoxerRenderer;
+import net.crimsonsteve.simplemutantmobs.client.renderer.StuntSkeletonUpperBodyRenderer;
 import net.crimsonsteve.simplemutantmobs.client.renderer.MutantSkeletonRenderer;
 import net.crimsonsteve.simplemutantmobs.client.renderer.HopkeletonRenderer;
 
@@ -19,5 +22,7 @@ public class CrimsonstevesMutantMobsModEntityRenderers {
 		event.registerEntityRenderer(CrimsonstevesMutantMobsModEntities.MUTANT_SKELETON.get(), MutantSkeletonRenderer::new);
 		event.registerEntityRenderer(CrimsonstevesMutantMobsModEntities.HOPKELETON.get(), HopkeletonRenderer::new);
 		event.registerEntityRenderer(CrimsonstevesMutantMobsModEntities.WITHERED_HOPKELETON.get(), WitheredHopkeletonRenderer::new);
+		event.registerEntityRenderer(CrimsonstevesMutantMobsModEntities.STUNT_SKELETON_UPPER_BODY.get(), StuntSkeletonUpperBodyRenderer::new);
+		event.registerEntityRenderer(CrimsonstevesMutantMobsModEntities.WITHERED_BOXER.get(), WitheredBoxerRenderer::new);
 	}
 }

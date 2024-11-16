@@ -16,6 +16,12 @@
       },
       {
         "value": "CUSTOM:WitheredHopkeleton"
+      },
+      {
+        "value": "CUSTOM:StuntSkeletonUpperBody"
+      },
+      {
+        "value": "CUSTOM:WitheredBoxer"
       }
     ]
   }

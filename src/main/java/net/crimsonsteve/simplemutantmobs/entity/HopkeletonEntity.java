@@ -1,15 +1,14 @@
 
 package net.crimsonsteve.simplemutantmobs.entity;
 
-import software.bernie.geckolib3.util.GeckoLibUtil;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib.util.GeckoLibUtil;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animatable.GeoEntity;
 
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.network.PlayMessages;
@@ -36,12 +35,14 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.nbt.CompoundTag;
 
@@ -50,11 +51,11 @@ import net.crimsonsteve.simplemutantmobs.procedures.HopkeletonOnEntityTickUpdate
 import net.crimsonsteve.simplemutantmobs.procedures.HopkeletonNaturalEntitySpawningConditionProcedure;
 import net.crimsonsteve.simplemutantmobs.init.CrimsonstevesMutantMobsModEntities;
 
-public class HopkeletonEntity extends Monster implements IAnimatable {
+public class HopkeletonEntity extends Monster implements GeoEntity {
 	public static final EntityDataAccessor<Boolean> SHOOT = SynchedEntityData.defineId(HopkeletonEntity.class, EntityDataSerializers.BOOLEAN);
 	public static final EntityDataAccessor<String> ANIMATION = SynchedEntityData.defineId(HopkeletonEntity.class, EntityDataSerializers.STRING);
 	public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.defineId(HopkeletonEntity.class, EntityDataSerializers.STRING);
-	private AnimationFactory factory = GeckoLibUtil.createFactory(this);
+	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	private boolean swinging;
 	private boolean lastloop;
 	private long lastSwing;
@@ -68,7 +69,7 @@ public class HopkeletonEntity extends Monster implements IAnimatable {
 		super(type, world);
 		xpReward = 10;
 		setNoAi(false);
-		maxUpStep = 0.6f;
+		setMaxUpStep(0.6f);
 	}
 
 	@Override
@@ -88,7 +89,7 @@ public class HopkeletonEntity extends Monster implements IAnimatable {
 	}
 
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
@@ -107,7 +108,7 @@ public class HopkeletonEntity extends Monster implements IAnimatable {
 				double y = HopkeletonEntity.this.getY();
 				double z = HopkeletonEntity.this.getZ();
 				Entity entity = HopkeletonEntity.this;
-				Level world = HopkeletonEntity.this.level;
+				Level world = HopkeletonEntity.this.level();
 				return super.canUse() && IsInActionProcedure.execute(entity);
 			}
 		});
@@ -122,7 +123,7 @@ public class HopkeletonEntity extends Monster implements IAnimatable {
 				double y = HopkeletonEntity.this.getY();
 				double z = HopkeletonEntity.this.getZ();
 				Entity entity = HopkeletonEntity.this;
-				Level world = HopkeletonEntity.this.level;
+				Level world = HopkeletonEntity.this.level();
 				return super.canUse() && IsInActionProcedure.execute(entity);
 			}
 		});
@@ -133,7 +134,7 @@ public class HopkeletonEntity extends Monster implements IAnimatable {
 				double y = HopkeletonEntity.this.getY();
 				double z = HopkeletonEntity.this.getZ();
 				Entity entity = HopkeletonEntity.this;
-				Level world = HopkeletonEntity.this.level;
+				Level world = HopkeletonEntity.this.level();
 				return super.canUse() && IsInActionProcedure.execute(entity);
 			}
 		});
@@ -161,9 +162,9 @@ public class HopkeletonEntity extends Monster implements IAnimatable {
 
 	@Override
 	public boolean hurt(DamageSource source, float amount) {
-		if (source == DamageSource.FALL)
+		if (source.is(DamageTypes.FALL))
 			return false;
-		if (source == DamageSource.DROWN)
+		if (source.is(DamageTypes.DROWN))
 			return false;
 		return super.hurt(source, amount);
 	}
@@ -187,7 +188,7 @@ public class HopkeletonEntity extends Monster implements IAnimatable {
 		if (this.isSunBurnTick()) {
 			this.setSecondsOnFire(8);
 		}
-		HopkeletonOnEntityTickUpdateProcedure.execute(this.level, this.getX(), this.getY(), this.getZ(), this);
+		HopkeletonOnEntityTickUpdateProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
 		this.refreshDimensions();
 	}
 
@@ -215,27 +216,29 @@ public class HopkeletonEntity extends Monster implements IAnimatable {
 		return builder;
 	}
 
-	private <E extends IAnimatable> PlayState movementPredicate(AnimationEvent<E> event) {
+	private PlayState movementPredicate(AnimationState event) {
 		if (this.animationprocedure.equals("empty")) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("idle", EDefaultLoopTypes.LOOP));
-			return PlayState.CONTINUE;
+			return event.setAndContinue(RawAnimation.begin().thenLoop("idle"));
 		}
 		return PlayState.STOP;
 	}
 
 	String prevAnim = "empty";
 
-	private <E extends IAnimatable> PlayState procedurePredicate(AnimationEvent<E> event) {
-		if (!this.animationprocedure.equals("empty") && event.getController().getAnimationState().equals(software.bernie.geckolib3.core.AnimationState.Stopped)) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation(this.animationprocedure, EDefaultLoopTypes.PLAY_ONCE));
-			if (event.getController().getAnimationState().equals(software.bernie.geckolib3.core.AnimationState.Stopped)) {
+	private PlayState procedurePredicate(AnimationState event) {
+		if (!animationprocedure.equals("empty") && event.getController().getAnimationState() == AnimationController.State.STOPPED || (!this.animationprocedure.equals(prevAnim) && !this.animationprocedure.equals("empty"))) {
+			if (!this.animationprocedure.equals(prevAnim))
+				event.getController().forceAnimationReset();
+			event.getController().setAnimation(RawAnimation.begin().thenPlay(this.animationprocedure));
+			if (event.getController().getAnimationState() == AnimationController.State.STOPPED) {
 				this.animationprocedure = "empty";
-				event.getController().markNeedsReload();
+				event.getController().forceAnimationReset();
 			}
-		} else if (!animationprocedure.equals(prevAnim)) {
+		} else if (animationprocedure.equals("empty")) {
+			prevAnim = "empty";
 			return PlayState.STOP;
 		}
-		prevAnim = animationprocedure;
+		prevAnim = this.animationprocedure;
 		return PlayState.CONTINUE;
 	}
 
@@ -257,13 +260,13 @@ public class HopkeletonEntity extends Monster implements IAnimatable {
 	}
 
 	@Override
-	public void registerControllers(AnimationData data) {
-		data.addAnimationController(new AnimationController<>(this, "movement", 4, this::movementPredicate));
-		data.addAnimationController(new AnimationController<>(this, "procedure", 4, this::procedurePredicate));
+	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
+		data.add(new AnimationController<>(this, "movement", 4, this::movementPredicate));
+		data.add(new AnimationController<>(this, "procedure", 4, this::procedurePredicate));
 	}
 
 	@Override
-	public AnimationFactory getFactory() {
-		return this.factory;
+	public AnimatableInstanceCache getAnimatableInstanceCache() {
+		return this.cache;
 	}
 }

@@ -18,7 +18,7 @@ public class HopkeletonAttackProgressProcedure {
 		double speed = 0;
 		Entity target = null;
 		if (((LivingEntity) entity).getAttribute(CrimsonstevesMutantMobsModAttributes.ACTIONSTATE.get()).getBaseValue() == 0) {
-			if (entity.isOnGround() || entity.isInWater()) {
+			if (entity.onGround() || entity.isInWater()) {
 				currentAnimation = "idle";
 			} else {
 				currentAnimation = currentAnimation;
@@ -54,7 +54,7 @@ public class HopkeletonAttackProgressProcedure {
 				} else if (attackProgress == 1 && entity.getPersistentData().getDouble("attackTicks") >= 8) {
 					currentAnimation = "hop_attack_idle";
 					attackProgress = 2;
-				} else if (attackProgress == 2 && (entity.getPersistentData().getDouble("attackTicks") >= 20 || entity.isOnGround() || entity.fallDistance > 0)) {
+				} else if (attackProgress == 2 && (entity.getPersistentData().getDouble("attackTicks") >= 20 || entity.onGround() || entity.fallDistance > 0)) {
 					currentAnimation = "hop_attack_occur";
 					attackProgress = 0;
 					((LivingEntity) entity).getAttribute(CrimsonstevesMutantMobsModAttributes.ACTIONSTATE.get()).setBaseValue(2);

@@ -17,6 +17,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Entity;
 
 import net.crimsonsteve.simplemutantmobs.entity.WitheredHopkeletonEntity;
+import net.crimsonsteve.simplemutantmobs.entity.WitheredBoxerEntity;
+import net.crimsonsteve.simplemutantmobs.entity.StuntSkeletonUpperBodyEntity;
 import net.crimsonsteve.simplemutantmobs.entity.MutantSkeletonEntity;
 import net.crimsonsteve.simplemutantmobs.entity.HopkeletonEntity;
 import net.crimsonsteve.simplemutantmobs.CrimsonstevesMutantMobsMod;
@@ -34,6 +36,13 @@ public class CrimsonstevesMutantMobsModEntities {
 					.sized(0.6f, 2f));
 	public static final RegistryObject<EntityType<WitheredHopkeletonEntity>> WITHERED_HOPKELETON = register("withered_hopkeleton", EntityType.Builder.<WitheredHopkeletonEntity>of(WitheredHopkeletonEntity::new, MobCategory.MONSTER)
 			.setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(WitheredHopkeletonEntity::new).fireImmune().sized(0.72f, 2.4f));
+	public static final RegistryObject<EntityType<StuntSkeletonUpperBodyEntity>> STUNT_SKELETON_UPPER_BODY = register("stunt_skeleton_upper_body",
+			EntityType.Builder.<StuntSkeletonUpperBodyEntity>of(StuntSkeletonUpperBodyEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3)
+					.setCustomClientFactory(StuntSkeletonUpperBodyEntity::new)
+
+					.sized(1.2f, 1f));
+	public static final RegistryObject<EntityType<WitheredBoxerEntity>> WITHERED_BOXER = register("withered_boxer", EntityType.Builder.<WitheredBoxerEntity>of(WitheredBoxerEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true)
+			.setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(WitheredBoxerEntity::new).fireImmune().sized(0.6f, 1.8f));
 
 	private static <T extends Entity> RegistryObject<EntityType<T>> register(String registryname, EntityType.Builder<T> entityTypeBuilder) {
 		return REGISTRY.register(registryname, () -> (EntityType<T>) entityTypeBuilder.build(registryname));
@@ -45,6 +54,8 @@ public class CrimsonstevesMutantMobsModEntities {
 			MutantSkeletonEntity.init();
 			HopkeletonEntity.init();
 			WitheredHopkeletonEntity.init();
+			StuntSkeletonUpperBodyEntity.init();
+			WitheredBoxerEntity.init();
 		});
 	}
 
@@ -53,5 +64,7 @@ public class CrimsonstevesMutantMobsModEntities {
 		event.put(MUTANT_SKELETON.get(), MutantSkeletonEntity.createAttributes().build());
 		event.put(HOPKELETON.get(), HopkeletonEntity.createAttributes().build());
 		event.put(WITHERED_HOPKELETON.get(), WitheredHopkeletonEntity.createAttributes().build());
+		event.put(STUNT_SKELETON_UPPER_BODY.get(), StuntSkeletonUpperBodyEntity.createAttributes().build());
+		event.put(WITHERED_BOXER.get(), WitheredBoxerEntity.createAttributes().build());
 	}
 }

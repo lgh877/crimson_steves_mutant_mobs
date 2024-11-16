@@ -1,16 +1,20 @@
 {
   "entity.crimsonsteves_mutant_mobs.withered_hopkeleton": "Withered Hopkeleton",
   "attribute.crimsonsteves_mutant_mobs.action_state": "Action State",
-  "subtitles.mutant_skeleton_avoid": "Stunt skeleton leaps",
+  "item.crimsonsteves_mutant_mobs.stunt_skeleton_upper_body_spawn_egg": "Stunt Skeleton Upper Body Spawn Egg",
+  "subtitles.mutant_skeleton_avoid": "Stunt skeleton avoids",
   "subtitles.mutant_skeleton_death": "Stunt skeleton collapses",
   "entity.crimsonsteves_mutant_mobs.mutant_skeleton": "Stunt Skeleton",
   "subtitles.mutant_skeleton_hurt": "Stunt skeleton gets hurt",
-  "subtitles.mutant_skeleton_punch": "Stunt skeleton attacks",
+  "subtitles.mutant_skeleton_punch": "Stunt skeleton strikes",
   "item.crimsonsteves_mutant_mobs.hopkeleton_spawn_egg": "Hopkeleton Spawn Egg",
-  "subtitles.mutant_skeleton_idle": "Stunt skeleton idle",
+  "subtitles.mutant_skeleton_idle": "Stunt skeleton is nearby",
+  "item.crimsonsteves_mutant_mobs.withered_boxer_spawn_egg": "Withered Boxer Spawn Egg",
   "subtitles.mutant_skeleton_step": "Stunt skeleton steps",
   "subtitles.mutant_skeleton_smash": "Stunt skeleton smashes",
   "item.crimsonsteves_mutant_mobs.withered_hopkeleton_spawn_egg": "Withered Hopkeleton Spawn Egg",
+  "entity.crimsonsteves_mutant_mobs.withered_boxer": "Withered Boxer",
+  "entity.crimsonsteves_mutant_mobs.stunt_skeleton_upper_body": "Stunt Skeleton Upper Body",
   "item.crimsonsteves_mutant_mobs.mutant_skeleton_spawn_egg": "Stunt Skeleton Spawn Egg",
   "entity.crimsonsteves_mutant_mobs.hopkeleton": "Hopkeleton"
 }

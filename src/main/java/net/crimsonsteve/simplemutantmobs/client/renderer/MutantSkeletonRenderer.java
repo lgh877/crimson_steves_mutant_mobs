@@ -1,9 +1,11 @@
 
 package net.crimsonsteve.simplemutantmobs.client.renderer;
 
-import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
-import software.bernie.geckolib3.geo.render.built.GeoModel;
-import software.bernie.geckolib3.geo.render.built.GeoBone;
+import software.bernie.geckolib.renderer.GeoEntityRenderer;
+import software.bernie.geckolib.cache.object.GeoBone;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
+
+import org.joml.Vector3d;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.particles.ParticleTypes;
@@ -14,9 +16,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.crimsonsteve.simplemutantmobs.entity.model.MutantSkeletonModel;
 import net.crimsonsteve.simplemutantmobs.entity.MutantSkeletonEntity;
 
-import javax.annotation.Nullable;
-
-import com.mojang.math.Vector3d;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.PoseStack;
 
@@ -27,9 +26,14 @@ public class MutantSkeletonRenderer extends GeoEntityRenderer<MutantSkeletonEnti
 	}
 
 	@Override
-	public void render(GeoModel model, MutantSkeletonEntity animatable, float partialTick, RenderType type, PoseStack poseStack, @Nullable MultiBufferSource bufferSource, @Nullable VertexConsumer buffer, int packedLight, int packedOverlay, float red,
+	public RenderType getRenderType(MutantSkeletonEntity animatable, ResourceLocation texture, MultiBufferSource bufferSource, float partialTick) {
+		return RenderType.entityTranslucent(getTextureLocation(animatable));
+	}
+
+	@Override
+	public void postRender(PoseStack poseStack, MutantSkeletonEntity animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red,
 			float green, float blue, float alpha) {
-		super.render(model, animatable, partialTick, type, poseStack, bufferSource, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+		super.postRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
 		int particleSettings = animatable.getEntityData().get(MutantSkeletonEntity.DATA_particleSettings);
 		GeoBone particle;
 		Vector3d particlePos;
@@ -61,8 +65,11 @@ public class MutantSkeletonRenderer extends GeoEntityRenderer<MutantSkeletonEnti
 	}
 
 	@Override
-	public RenderType getRenderType(MutantSkeletonEntity entity, float partialTicks, PoseStack stack, MultiBufferSource renderTypeBuffer, VertexConsumer vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-		stack.scale(1f, 1f, 1f);
-		return RenderType.entityTranslucent(getTextureLocation(entity));
+	public void preRender(PoseStack poseStack, MutantSkeletonEntity entity, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green,
+			float blue, float alpha) {
+		float scale = 1f;
+		this.scaleHeight = scale;
+		this.scaleWidth = scale;
+		super.preRender(poseStack, entity, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 }

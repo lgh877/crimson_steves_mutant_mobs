@@ -1,6 +1,7 @@
 {
   "entity.crimsonsteves_mutant_mobs.withered_hopkeleton": "위더 스켈레통",
   "attribute.crimsonsteves_mutant_mobs.action_state": "Action State",
+  "item.crimsonsteves_mutant_mobs.stunt_skeleton_upper_body_spawn_egg": "스턴트 스켈레톤의 상반신 생성 알",
   "subtitles.mutant_skeleton_avoid": "스턴트 스켈레톤이 도약하는 소리",
   "subtitles.mutant_skeleton_death": "스턴트 스켈레톤이 무너지는 소리",
   "entity.crimsonsteves_mutant_mobs.mutant_skeleton": "스턴트 스켈레톤",
@@ -8,9 +9,12 @@
   "subtitles.mutant_skeleton_punch": "스턴트 스켈레톤의 주먹 내지르는 소리",
   "item.crimsonsteves_mutant_mobs.hopkeleton_spawn_egg": "스켈레통 생성 알",
   "subtitles.mutant_skeleton_idle": "스턴트 스켈레톤의 평소 소리",
+  "item.crimsonsteves_mutant_mobs.withered_boxer_spawn_egg": "위더 복서 생성 알",
   "subtitles.mutant_skeleton_step": "스턴트 스켈레톤이 걷는 소리",
   "subtitles.mutant_skeleton_smash": "스턴트 스켈레톤이 바닥을 내려치는 소리",
   "item.crimsonsteves_mutant_mobs.withered_hopkeleton_spawn_egg": "위더 스켈레통 생성 알",
+  "entity.crimsonsteves_mutant_mobs.withered_boxer": "위더 복서",
+  "entity.crimsonsteves_mutant_mobs.stunt_skeleton_upper_body": "스턴트 스켈레톤의 상반신",
   "item.crimsonsteves_mutant_mobs.mutant_skeleton_spawn_egg": "스턴트 스켈레톤 생성 알",
   "entity.crimsonsteves_mutant_mobs.hopkeleton": "스켈레통"
 }
