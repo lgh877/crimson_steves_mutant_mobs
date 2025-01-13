@@ -2,7 +2,7 @@
   "_fv": 66,
   "_type": "animatedentity",
   "definition": {
-    "mobName": "Withered Boxer",
+    "mobName": "Chad Withered Boxer",
     "mobLabel": "",
     "mobModelTexture": "soul_steve.png",
     "mobModelGlowTexture": "soul_steve_layer.png",
@@ -13,18 +13,18 @@
       "fixedValue": 1.0
     },
     "entityDataEntries": [],
-    "modelWidth": 0.6,
-    "modelHeight": 1.8,
-    "modelShadowSize": 0.5,
+    "modelWidth": 1.0,
+    "modelHeight": 2.6,
+    "modelShadowSize": 0.8,
     "mountedYOffset": 0.0,
     "stepHeight": 1.1,
     "hasSpawnEgg": true,
     "spawnEggBaseColor": {
-      "value": -14015966,
+      "value": -14936811,
       "falpha": 0.0
     },
     "spawnEggDotColor": {
-      "value": -7881517,
+      "value": -8606795,
       "falpha": 0.0
     },
     "creativeTabs": [
@@ -55,15 +55,15 @@
     },
     "mobBehaviourType": "Mob",
     "mobCreatureType": "UNDEAD",
-    "attackStrength": 3,
+    "attackStrength": 4,
     "attackKnockback": 0.0,
     "knockbackResistance": 0.0,
     "movementSpeed": 0.3,
     "armorBaseValue": 0.0,
     "trackingRange": 64,
-    "followRange": 32,
-    "health": 40,
-    "xpAmount": 40,
+    "followRange": 64,
+    "health": 75,
+    "xpAmount": 50,
     "waterMob": false,
     "flyingMob": false,
     "guiBoundTo": "<NONE>",
@@ -77,7 +77,7 @@
     "canControlStrafe": false,
     "immuneToFire": true,
     "immuneToArrows": false,
-    "immuneToFallDamage": false,
+    "immuneToFallDamage": true,
     "immuneToCactus": false,
     "immuneToDrowning": true,
     "immuneToLightning": false,
@@ -92,16 +92,16 @@
       "value": ""
     },
     "livingSound": {
-      "value": "entity.drowned.ambient_water"
+      "value": ""
     },
     "hurtSound": {
-      "value": "entity.drowned.hurt_water"
+      "value": "entity.wither.hurt"
     },
     "deathSound": {
-      "value": "entity.drowned.death_water"
+      "value": "entity.wither.ambient"
     },
     "stepSound": {
-      "value": "block.soul_sand.step"
+      "value": "block.soul_sand.hit"
     },
     "raidCelebrationSound": {
       "value": ""
@@ -110,15 +110,15 @@
       "name": "WitheredBoxerEntityIsHurt"
     },
     "onMobTickUpdate": {
-      "name": "WitheredBoxerOnEntityTickUpdate"
+      "name": "ChadWitheredBoxerOnEntityTickUpdate"
     },
     "hasAI": true,
     "aiBase": "(none)",
-    "aixml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"aitasks_container\" deletable=\"false\" x=\"40\" y=\"40\"><next><block type=\"attack_with_range\"><field name=\"range\">0</field><field name=\"speed\">1.2</field><field name=\"longmemory\">FALSE</field><field name=\"condition\">IsInAction,null</field><next><block type=\"attack_entity\"><field name=\"insight\">FALSE</field><field name=\"nearby\">FALSE</field><field name=\"entity\">EntityLiving</field><field name=\"condition\">null,null</field><next><block type=\"wander\"><field name=\"speed\">1</field><field name=\"condition\">IsInAction,null</field><next><block type=\"attack_action\"><field name=\"callhelp\">TRUE</field><field name=\"condition\">null,null</field><next><block type=\"look_around\"><field name=\"condition\">null,null</field><next><block type=\"swim_in_water\"><field name=\"condition\">null,null</field></block></next></block></next></block></next></block></next></block></next></block></next></block></xml>",
-    "model": "boxing_steve.geo.json",
+    "aixml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"aitasks_container\" deletable=\"false\" x=\"40\" y=\"40\"><next><block type=\"attack_with_range\"><field name=\"range\">0</field><field name=\"speed\">1.2</field><field name=\"longmemory\">FALSE</field><field name=\"condition\">IsInAction,null</field><next><block type=\"attack_entity\"><field name=\"insight\">FALSE</field><field name=\"nearby\">FALSE</field><field name=\"entity\">EntityLiving</field><field name=\"condition\">null,null</field><next><block type=\"wander\"><field name=\"speed\">1</field><field name=\"condition\">IsInAction,null</field><next><block type=\"attack_action\"><field name=\"callhelp\">FALSE</field><field name=\"condition\">null,null</field><next><block type=\"look_around\"><field name=\"condition\">null,null</field><next><block type=\"swim_in_water\"><field name=\"condition\">null,null</field></block></next></block></next></block></next></block></next></block></next></block></next></block></xml>",
+    "model": "chad_steve.geo.json",
     "groupName": "head",
     "animation1": "idle",
-    "animation2": "walk",
+    "animation2": "",
     "animation3": "",
     "animation4": "",
     "animation5": "",
@@ -161,10 +161,10 @@
     ],
     "spawnThisMob": false,
     "doesDespawnWhenIdle": false,
-    "spawningProbability": 100,
+    "spawningProbability": 20,
     "mobSpawningType": "monster",
-    "minNumberOfMobsPerGroup": 1,
-    "maxNumberOfMobsPerGroup": 1,
+    "minNumberOfMobsPerGroup": 4,
+    "maxNumberOfMobsPerGroup": 4,
     "restrictionBiomes": [],
     "spawnInDungeons": false
   }

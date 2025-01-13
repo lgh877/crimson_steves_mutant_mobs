@@ -51,6 +51,7 @@ import net.crimsonsteve.simplemutantmobs.procedures.ShouldStopMSkeleProcedure;
 import net.crimsonsteve.simplemutantmobs.procedures.MutantSkeletonSpawnConditionProcedure;
 import net.crimsonsteve.simplemutantmobs.procedures.MutantSkeletonOnEntityTickUpdateProcedure;
 import net.crimsonsteve.simplemutantmobs.procedures.MutantSkeletonEntityIsHurtProcedure;
+import net.crimsonsteve.simplemutantmobs.procedures.MutantSkeletonDeathTimeIsReachedProcedure;
 import net.crimsonsteve.simplemutantmobs.init.CrimsonstevesMutantMobsModEntities;
 import net.crimsonsteve.simplemutantmobs.MutantSkeletonMoveControl;
 
@@ -262,7 +263,7 @@ public class MutantSkeletonEntity extends Monster implements GeoEntity {
 		builder = builder.add(Attributes.MOVEMENT_SPEED, 0.4);
 		builder = builder.add(Attributes.MAX_HEALTH, 150);
 		builder = builder.add(Attributes.ARMOR, 0);
-		builder = builder.add(Attributes.ATTACK_DAMAGE, 7);
+		builder = builder.add(Attributes.ATTACK_DAMAGE, 5);
 		builder = builder.add(Attributes.FOLLOW_RANGE, 64);
 		builder = builder.add(Attributes.KNOCKBACK_RESISTANCE, 0.5);
 		builder = builder.add(Attributes.ATTACK_KNOCKBACK, 1);
@@ -301,9 +302,10 @@ public class MutantSkeletonEntity extends Monster implements GeoEntity {
 	@Override
 	protected void tickDeath() {
 		++this.deathTime;
-		if (this.deathTime == 20) {
+		if (this.deathTime == 10) {
 			this.remove(MutantSkeletonEntity.RemovalReason.KILLED);
 			this.dropExperience();
+			MutantSkeletonDeathTimeIsReachedProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
 		}
 	}
 

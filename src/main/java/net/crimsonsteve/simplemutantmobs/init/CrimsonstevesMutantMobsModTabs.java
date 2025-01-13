@@ -27,6 +27,7 @@ public class CrimsonstevesMutantMobsModTabs {
 			tabData.accept(CrimsonstevesMutantMobsModItems.WITHERED_HOPKELETON_SPAWN_EGG.get());
 			tabData.accept(CrimsonstevesMutantMobsModItems.STUNT_SKELETON_UPPER_BODY_SPAWN_EGG.get());
 			tabData.accept(CrimsonstevesMutantMobsModItems.WITHERED_BOXER_SPAWN_EGG.get());
+			tabData.accept(CrimsonstevesMutantMobsModItems.CHAD_WITHERED_BOXER_SPAWN_EGG.get());
 		}
 	}
 }

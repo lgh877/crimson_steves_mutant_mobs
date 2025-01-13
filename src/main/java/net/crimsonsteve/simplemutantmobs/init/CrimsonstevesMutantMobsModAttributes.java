@@ -36,5 +36,6 @@ public class CrimsonstevesMutantMobsModAttributes {
 		event.add(CrimsonstevesMutantMobsModEntities.WITHERED_HOPKELETON.get(), ACTIONSTATE.get());
 		event.add(CrimsonstevesMutantMobsModEntities.STUNT_SKELETON_UPPER_BODY.get(), ACTIONSTATE.get());
 		event.add(CrimsonstevesMutantMobsModEntities.WITHERED_BOXER.get(), ACTIONSTATE.get());
+		event.add(CrimsonstevesMutantMobsModEntities.CHAD_WITHERED_BOXER.get(), ACTIONSTATE.get());
 	}
 }

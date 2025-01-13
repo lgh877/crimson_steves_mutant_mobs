@@ -22,6 +22,8 @@ public class CrimsonstevesMutantMobsModItems {
 	public static final RegistryObject<Item> STUNT_SKELETON_UPPER_BODY_SPAWN_EGG = REGISTRY.register("stunt_skeleton_upper_body_spawn_egg",
 			() -> new ForgeSpawnEggItem(CrimsonstevesMutantMobsModEntities.STUNT_SKELETON_UPPER_BODY, -10066330, -6710887, new Item.Properties()));
 	public static final RegistryObject<Item> WITHERED_BOXER_SPAWN_EGG = REGISTRY.register("withered_boxer_spawn_egg", () -> new ForgeSpawnEggItem(CrimsonstevesMutantMobsModEntities.WITHERED_BOXER, -14015966, -7881517, new Item.Properties()));
+	public static final RegistryObject<Item> CHAD_WITHERED_BOXER_SPAWN_EGG = REGISTRY.register("chad_withered_boxer_spawn_egg",
+			() -> new ForgeSpawnEggItem(CrimsonstevesMutantMobsModEntities.CHAD_WITHERED_BOXER, -14936811, -8606795, new Item.Properties()));
 	// Start of user code block custom items
 	// End of user code block custom items
 }

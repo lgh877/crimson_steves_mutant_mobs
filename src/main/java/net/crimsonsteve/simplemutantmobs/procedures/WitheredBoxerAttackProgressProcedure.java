@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Comparator;
 
 public class WitheredBoxerAttackProgressProcedure {
-	public static String execute(LevelAccessor world, double x, double y, double z, Entity entity) {
+	public static String execute(LevelAccessor world, double x, double y, double z, Entity entity, double radius, double xoffset, double yoffset, double zoffset) {
 		if (entity == null)
 			return "";
 		double actionState = 0;
@@ -47,22 +47,21 @@ public class WitheredBoxerAttackProgressProcedure {
 			attackProgress = entity.getPersistentData().getDouble("attackProgress");
 			if (actionState == 1) {
 				if (entity.getPersistentData().getDouble("attackTicks") < 1) {
-					speed = ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getValue() * 2;
+					speed = ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getValue();
 					entity.setDeltaMovement(
 							new Vec3((entity.getLookAngle().x * speed + entity.getDeltaMovement().x()), (entity.getLookAngle().y * speed + entity.getDeltaMovement().y()), (entity.getLookAngle().z * speed + entity.getDeltaMovement().z())));
 				} else if (entity.getPersistentData().getDouble("attackTicks") >= 2) {
 					{
-						final Vec3 _center = new Vec3(x, (y + entity.getBbWidth() * 0.8), z);
-						List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate((entity.getBbWidth() * 2) / 2d), e -> true).stream()
-								.sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+						final Vec3 _center = new Vec3((x + xoffset), (y + yoffset), (z + zoffset));
+						List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(radius / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 						for (Entity entityiterator : _entfound) {
 							if ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == entityiterator) {
-								entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.GENERIC), entity),
+								entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity),
 										(float) ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue());
 								entityiterator.invulnerableTime = 0;
 								isInRadius = true;
 								if (world instanceof ServerLevel _level)
-									_level.sendParticles(ParticleTypes.CRIT, (entityiterator.getX()), (y + entity.getBbHeight()), (entityiterator.getZ()), 10, 0.1, 0.1, 0.1, 0.1);
+									_level.sendParticles(ParticleTypes.CRIT, (x + xoffset), (y + yoffset), (z + zoffset), (int) (10 * radius), 0.1, 0.1, 0.1, (0.1 * radius));
 							}
 						}
 					}
@@ -75,9 +74,18 @@ public class WitheredBoxerAttackProgressProcedure {
 							}
 						}
 						target = entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null;
-						actionState = 2;
-						currentAnimation = "punch_right" + Mth.nextInt(RandomSource.create(), 1, 4);
 						entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3((target.getX()), (target.getY()), (target.getZ())));
+						speed = Mth.nextInt(RandomSource.create(), 1, 3);
+						if (speed != 1) {
+							actionState = 2;
+							currentAnimation = "punch_right" + Mth.nextInt(RandomSource.create(), 1, 5);
+						} else {
+							actionState = 4;
+							currentAnimation = "weaving_right";
+							speed = ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getValue() * 3;
+							entity.setDeltaMovement(
+									new Vec3((entity.getLookAngle().x * speed + entity.getDeltaMovement().x()), (entity.getLookAngle().y * speed + entity.getDeltaMovement().y()), (entity.getLookAngle().z * speed + entity.getDeltaMovement().z())));
+						}
 					} else {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
@@ -97,17 +105,16 @@ public class WitheredBoxerAttackProgressProcedure {
 							new Vec3((entity.getLookAngle().x * speed + entity.getDeltaMovement().x()), (entity.getLookAngle().y * speed + entity.getDeltaMovement().y()), (entity.getLookAngle().z * speed + entity.getDeltaMovement().z())));
 				} else if (entity.getPersistentData().getDouble("attackTicks") >= 2) {
 					{
-						final Vec3 _center = new Vec3(x, (y + entity.getBbWidth() * 0.8), z);
-						List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate((entity.getBbWidth() * 2) / 2d), e -> true).stream()
-								.sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+						final Vec3 _center = new Vec3((x + xoffset), (y + yoffset), (z + zoffset));
+						List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(radius / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 						for (Entity entityiterator : _entfound) {
 							if ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == entityiterator) {
-								entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.GENERIC), entity),
+								entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity),
 										(float) ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue());
 								entityiterator.invulnerableTime = 0;
 								isInRadius = true;
 								if (world instanceof ServerLevel _level)
-									_level.sendParticles(ParticleTypes.CRIT, (entityiterator.getX()), (y + entity.getBbHeight()), (entityiterator.getZ()), 10, 0.1, 0.1, 0.1, 0.1);
+									_level.sendParticles(ParticleTypes.CRIT, (x + xoffset), (y + yoffset), (z + zoffset), (int) (10 * radius), 0.1, 0.1, 0.1, (0.1 * radius));
 							}
 						}
 					}
@@ -120,9 +127,18 @@ public class WitheredBoxerAttackProgressProcedure {
 							}
 						}
 						target = entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null;
-						actionState = 1;
-						currentAnimation = "punch_left" + Mth.nextInt(RandomSource.create(), 1, 4);
 						entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3((target.getX()), (target.getY()), (target.getZ())));
+						speed = Mth.nextInt(RandomSource.create(), 1, 3);
+						if (speed != 1) {
+							actionState = 1;
+							currentAnimation = "punch_left" + Mth.nextInt(RandomSource.create(), 1, 5);
+						} else {
+							actionState = 3;
+							currentAnimation = "weaving_left";
+							speed = ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getValue() * 3;
+							entity.setDeltaMovement(
+									new Vec3((entity.getLookAngle().x * speed + entity.getDeltaMovement().x()), (entity.getLookAngle().y * speed + entity.getDeltaMovement().y()), (entity.getLookAngle().z * speed + entity.getDeltaMovement().z())));
+						}
 					} else {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
@@ -136,30 +152,10 @@ public class WitheredBoxerAttackProgressProcedure {
 					entity.getPersistentData().putDouble("attackTicks", 0);
 				}
 			} else if (actionState == 3) {
-				if (entity.getPersistentData().getDouble("attackTicks") >= 3) {
-					{
-						final Vec3 _center = new Vec3(x, (y + entity.getBbWidth() * 0.8), z);
-						List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate((entity.getBbWidth() * 2) / 2d), e -> true).stream()
-								.sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
-						for (Entity entityiterator : _entfound) {
-							if ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == entityiterator) {
-								isInRadius = true;
-							}
-						}
-					}
-					if (isInRadius) {
-						target = entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null;
-						actionState = 2;
-						currentAnimation = "punch_right" + Mth.nextInt(RandomSource.create(), 1, 4);
-						entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3((target.getX()), (target.getY()), (target.getZ())));
-					} else {
-						actionState = 0;
-						currentAnimation = "idle";
-					}
-					entity.getPersistentData().putDouble("attackTicks", 0);
-				}
-			} else if (actionState == 4) {
-				if (entity.getPersistentData().getDouble("attackTicks") >= 3) {
+				if (entity.getPersistentData().getDouble("attackTicks") < 1) {
+					if (world instanceof ServerLevel _level)
+						_level.sendParticles(ParticleTypes.SWEEP_ATTACK, x, (y + entity.getBbHeight()), z, 1, 0, 0, 0, 0);
+				} else if (entity.getPersistentData().getDouble("attackTicks") >= 3) {
 					{
 						final Vec3 _center = new Vec3(x, (y + entity.getBbWidth() * 0.8), z);
 						List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate((entity.getBbWidth() * 2) / 2d), e -> true).stream()
@@ -173,7 +169,33 @@ public class WitheredBoxerAttackProgressProcedure {
 					if (isInRadius) {
 						target = entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null;
 						actionState = 1;
-						currentAnimation = "punch_left" + Mth.nextInt(RandomSource.create(), 1, 4);
+						currentAnimation = "punch_left" + Mth.nextInt(RandomSource.create(), 1, 5);
+						entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3((target.getX()), (target.getY()), (target.getZ())));
+					} else {
+						actionState = 0;
+						currentAnimation = "idle";
+					}
+					entity.getPersistentData().putDouble("attackTicks", 0);
+				}
+			} else if (actionState == 4) {
+				if (entity.getPersistentData().getDouble("attackTicks") < 1) {
+					if (world instanceof ServerLevel _level)
+						_level.sendParticles(ParticleTypes.SWEEP_ATTACK, x, (y + entity.getBbHeight()), z, 1, 0, 0, 0, 0);
+				} else if (entity.getPersistentData().getDouble("attackTicks") >= 3) {
+					{
+						final Vec3 _center = new Vec3(x, (y + entity.getBbWidth() * 0.8), z);
+						List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate((entity.getBbWidth() * 2) / 2d), e -> true).stream()
+								.sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+						for (Entity entityiterator : _entfound) {
+							if ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == entityiterator) {
+								isInRadius = true;
+							}
+						}
+					}
+					if (isInRadius) {
+						target = entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null;
+						actionState = 2;
+						currentAnimation = "punch_right" + Mth.nextInt(RandomSource.create(), 1, 5);
 						entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3((target.getX()), (target.getY()), (target.getZ())));
 					} else {
 						actionState = 0;

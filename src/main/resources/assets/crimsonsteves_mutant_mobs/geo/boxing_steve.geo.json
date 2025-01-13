@@ -16,7 +16,7 @@
 					"pivot": [0, 0, 0]
 				},
 				{
-					"name": "lower_body",
+					"name": "lowerBody",
 					"parent": "whole",
 					"pivot": [0, 12, 0],
 					"cubes": [
@@ -36,7 +36,7 @@
 				},
 				{
 					"name": "lower_body_wear",
-					"parent": "lower_body",
+					"parent": "lowerBody",
 					"pivot": [0, 12, 0],
 					"cubes": [
 						{
@@ -54,8 +54,8 @@
 					]
 				},
 				{
-					"name": "upper_body",
-					"parent": "lower_body",
+					"name": "upperBody",
+					"parent": "lowerBody",
 					"pivot": [0, 18, 0],
 					"cubes": [
 						{
@@ -74,7 +74,7 @@
 				},
 				{
 					"name": "upper_body_wear",
-					"parent": "upper_body",
+					"parent": "upperBody",
 					"pivot": [0, 18, 0],
 					"cubes": [
 						{
@@ -93,7 +93,7 @@
 				},
 				{
 					"name": "head",
-					"parent": "upper_body",
+					"parent": "upperBody",
 					"pivot": [0, 24, 0],
 					"cubes": [
 						{"origin": [-4, 24, -4], "size": [8, 8, 8], "uv": [0, 0]}
@@ -108,8 +108,8 @@
 					]
 				},
 				{
-					"name": "left_shoulder",
-					"parent": "upper_body",
+					"name": "rightShoulder",
+					"parent": "upperBody",
 					"pivot": [-6, 22, 0],
 					"cubes": [
 						{
@@ -128,7 +128,7 @@
 				},
 				{
 					"name": "left_shoulder_wear",
-					"parent": "left_shoulder",
+					"parent": "rightShoulder",
 					"pivot": [-6, 22, 0],
 					"cubes": [
 						{
@@ -146,8 +146,8 @@
 					]
 				},
 				{
-					"name": "left_wrist",
-					"parent": "left_shoulder",
+					"name": "rightWrist",
+					"parent": "rightShoulder",
 					"pivot": [-6, 18, 0],
 					"cubes": [
 						{
@@ -166,7 +166,7 @@
 				},
 				{
 					"name": "left_wrist_wear",
-					"parent": "left_wrist",
+					"parent": "rightWrist",
 					"pivot": [-6, 16, 0],
 					"cubes": [
 						{
@@ -184,8 +184,8 @@
 					]
 				},
 				{
-					"name": "right_shoulder",
-					"parent": "upper_body",
+					"name": "leftShoulder",
+					"parent": "upperBody",
 					"pivot": [6, 22, 0],
 					"cubes": [
 						{
@@ -204,7 +204,7 @@
 				},
 				{
 					"name": "right_shoulder_wear",
-					"parent": "right_shoulder",
+					"parent": "leftShoulder",
 					"pivot": [6, 22, 0],
 					"cubes": [
 						{
@@ -222,8 +222,8 @@
 					]
 				},
 				{
-					"name": "right_wrist",
-					"parent": "right_shoulder",
+					"name": "leftWrist",
+					"parent": "leftShoulder",
 					"pivot": [6, 18, 0],
 					"cubes": [
 						{
@@ -242,7 +242,7 @@
 				},
 				{
 					"name": "right_wrist_wear",
-					"parent": "right_wrist",
+					"parent": "leftWrist",
 					"pivot": [6, 16, 0],
 					"cubes": [
 						{
@@ -260,7 +260,7 @@
 					]
 				},
 				{
-					"name": "right_thigh",
+					"name": "rightThigh",
 					"parent": "whole",
 					"pivot": [-2, 12, 0],
 					"cubes": [
@@ -280,7 +280,7 @@
 				},
 				{
 					"name": "right_thigh_wear",
-					"parent": "right_thigh",
+					"parent": "rightThigh",
 					"pivot": [-2, 12, 0],
 					"cubes": [
 						{
@@ -298,8 +298,8 @@
 					]
 				},
 				{
-					"name": "right_shank",
-					"parent": "right_thigh",
+					"name": "rightShank",
+					"parent": "rightThigh",
 					"pivot": [-2, 6, 0],
 					"cubes": [
 						{
@@ -318,7 +318,7 @@
 				},
 				{
 					"name": "right_shank_wear",
-					"parent": "right_shank",
+					"parent": "rightShank",
 					"pivot": [-2, 6, 0],
 					"cubes": [
 						{
@@ -336,7 +336,7 @@
 					]
 				},
 				{
-					"name": "left_thigh",
+					"name": "leftThigh",
 					"parent": "whole",
 					"pivot": [2, 12, 0],
 					"cubes": [
@@ -356,7 +356,7 @@
 				},
 				{
 					"name": "left_thigh_wear",
-					"parent": "left_thigh",
+					"parent": "leftThigh",
 					"pivot": [2, 12, 0],
 					"cubes": [
 						{
@@ -374,8 +374,8 @@
 					]
 				},
 				{
-					"name": "left_shank",
-					"parent": "left_thigh",
+					"name": "leftShank",
+					"parent": "leftThigh",
 					"pivot": [2, 6, 0],
 					"cubes": [
 						{
@@ -394,7 +394,7 @@
 				},
 				{
 					"name": "left_shank_wear",
-					"parent": "left_shank",
+					"parent": "leftShank",
 					"pivot": [2, 6, 0],
 					"cubes": [
 						{

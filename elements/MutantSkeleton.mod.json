@@ -84,7 +84,7 @@
     },
     "mobBehaviourType": "Mob",
     "mobCreatureType": "UNDEAD",
-    "attackStrength": 7,
+    "attackStrength": 5,
     "attackKnockback": 1.0,
     "knockbackResistance": 0.5,
     "movementSpeed": 0.4,
@@ -98,7 +98,7 @@
     "guiBoundTo": "<NONE>",
     "inventorySize": 9,
     "inventoryStackSize": 64,
-    "deathTime": 20,
+    "deathTime": 2,
     "lerp": 0,
     "disableCollisions": false,
     "ridable": false,
@@ -140,6 +140,9 @@
     },
     "onMobTickUpdate": {
       "name": "MutantSkeletonOnEntityTickUpdate"
+    },
+    "finishedDying": {
+      "name": "MutantSkeletonDeathTimeIsReached"
     },
     "hasAI": true,
     "aiBase": "(none)",

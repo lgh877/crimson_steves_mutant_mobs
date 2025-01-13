@@ -14,6 +14,7 @@ import net.crimsonsteve.simplemutantmobs.client.renderer.WitheredBoxerRenderer;
 import net.crimsonsteve.simplemutantmobs.client.renderer.StuntSkeletonUpperBodyRenderer;
 import net.crimsonsteve.simplemutantmobs.client.renderer.MutantSkeletonRenderer;
 import net.crimsonsteve.simplemutantmobs.client.renderer.HopkeletonRenderer;
+import net.crimsonsteve.simplemutantmobs.client.renderer.ChadWitheredBoxerRenderer;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class CrimsonstevesMutantMobsModEntityRenderers {
@@ -24,5 +25,6 @@ public class CrimsonstevesMutantMobsModEntityRenderers {
 		event.registerEntityRenderer(CrimsonstevesMutantMobsModEntities.WITHERED_HOPKELETON.get(), WitheredHopkeletonRenderer::new);
 		event.registerEntityRenderer(CrimsonstevesMutantMobsModEntities.STUNT_SKELETON_UPPER_BODY.get(), StuntSkeletonUpperBodyRenderer::new);
 		event.registerEntityRenderer(CrimsonstevesMutantMobsModEntities.WITHERED_BOXER.get(), WitheredBoxerRenderer::new);
+		event.registerEntityRenderer(CrimsonstevesMutantMobsModEntities.CHAD_WITHERED_BOXER.get(), ChadWitheredBoxerRenderer::new);
 	}
 }

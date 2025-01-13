@@ -921,7 +921,15 @@
             "type": "entity"
           },
           {
+            "name": "radius",
+            "type": "number"
+          },
+          {
             "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "xoffset",
             "type": "number"
           },
           {
@@ -929,7 +937,15 @@
             "type": "number"
           },
           {
+            "name": "yoffset",
+            "type": "number"
+          },
+          {
             "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "zoffset",
             "type": "number"
           },
           {
@@ -1041,6 +1057,196 @@
         ]
       },
       "path": "~/mobs/mutantskeleton"
+    },
+    {
+      "name": "MutantSkeletonDeathTimeIsReached",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "mutant_skeleton_death_time_is_reached",
+      "metadata": {
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/MutantSkeletonDeathTimeIsReachedProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/mobs/mutantskeleton"
+    },
+    {
+      "name": "StuntSkeletonUpperBodyLootTable",
+      "type": "loottable",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "stunt_skeleton_upper_body_loot_table",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/crimsonsteves_mutant_mobs/loot_tables/entities/stunt_skeleton_upper_body.json"
+        ]
+      },
+      "path": "~/mobs/mutantskeleton"
+    },
+    {
+      "name": "ChadWitheredBoxer",
+      "type": "animatedentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "chad_withered_boxer",
+      "metadata": {
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/entity/ChadWitheredBoxerEntity.java",
+          "src/main/java/net/crimsonsteve/simplemutantmobs/entity/layer/ChadWitheredBoxerLayer.java",
+          "src/main/java/net/crimsonsteve/simplemutantmobs/entity/model/ChadWitheredBoxerModel.java",
+          "src/main/java/net/crimsonsteve/simplemutantmobs/client/renderer/ChadWitheredBoxerRenderer.java",
+          "src/main/resources/assets/crimsonsteves_mutant_mobs/models/item/chad_withered_boxer_spawn_egg.json"
+        ]
+      },
+      "path": "~/mobs/withered boxer"
+    },
+    {
+      "name": "ChadWitheredBoxerOnEntityTickUpdate",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "chad_withered_boxer_on_entity_tick_update",
+      "metadata": {
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/ChadWitheredBoxerOnEntityTickUpdateProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/mobs/withered boxer"
+    },
+    {
+      "name": "TeleportMoveControl",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "teleport_move_control",
+      "metadata": {
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/TeleportMoveControl.java"
+        ]
+      }
+    },
+    {
+      "name": "DwellerThingOnEntityTickUpdate",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "dweller_thing_on_entity_tick_update",
+      "metadata": {
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/DwellerThingOnEntityTickUpdateProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          }
+        ]
+      },
+      "path": "~/mobs/testmobs"
+    },
+    {
+      "name": "BasicAnimAttackProcedure",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "basic_anim_attack_procedure",
+      "metadata": {
+        "files": [
+          "src/main/java/net/crimsonsteve/simplemutantmobs/procedures/BasicAnimAttackProcedureProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "attackEndTime",
+            "type": "number"
+          },
+          {
+            "name": "attackOccurTime",
+            "type": "number"
+          },
+          {
+            "name": "damage",
+            "type": "number"
+          },
+          {
+            "name": "hitBox",
+            "type": "number"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/mobs/testmobs"
     }
   ],
   "variable_elements": [],
@@ -1136,17 +1342,19 @@
       "attribute.crimsonsteves_mutant_mobs.action_state": "Action State",
       "item.crimsonsteves_mutant_mobs.stunt_skeleton_upper_body_spawn_egg": "스턴트 스켈레톤의 상반신 생성 알",
       "subtitles.mutant_skeleton_avoid": "스턴트 스켈레톤이 도약하는 소리",
-      "subtitles.mutant_skeleton_death": "스턴트 스켈레톤이 무너지는 소리",
       "entity.crimsonsteves_mutant_mobs.mutant_skeleton": "스턴트 스켈레톤",
+      "subtitles.mutant_skeleton_death": "스턴트 스켈레톤이 무너지는 소리",
       "subtitles.mutant_skeleton_hurt": "스턴트 스켈레톤이 공격받는 소리",
       "subtitles.mutant_skeleton_punch": "스턴트 스켈레톤의 주먹 내지르는 소리",
       "item.crimsonsteves_mutant_mobs.hopkeleton_spawn_egg": "스켈레통 생성 알",
+      "item.crimsonsteves_mutant_mobs.chad_withered_boxer_spawn_egg": "Chad Withered Boxer Spawn Egg",
       "subtitles.mutant_skeleton_idle": "스턴트 스켈레톤의 평소 소리",
       "item.crimsonsteves_mutant_mobs.withered_boxer_spawn_egg": "위더 복서 생성 알",
+      "entity.crimsonsteves_mutant_mobs.withered_boxer": "위더 복서",
+      "item.crimsonsteves_mutant_mobs.withered_hopkeleton_spawn_egg": "위더 스켈레통 생성 알",
       "subtitles.mutant_skeleton_step": "스턴트 스켈레톤이 걷는 소리",
       "subtitles.mutant_skeleton_smash": "스턴트 스켈레톤이 바닥을 내려치는 소리",
-      "item.crimsonsteves_mutant_mobs.withered_hopkeleton_spawn_egg": "위더 스켈레통 생성 알",
-      "entity.crimsonsteves_mutant_mobs.withered_boxer": "위더 복서",
+      "entity.crimsonsteves_mutant_mobs.chad_withered_boxer": "Chad Withered Boxer",
       "entity.crimsonsteves_mutant_mobs.stunt_skeleton_upper_body": "스턴트 스켈레톤의 상반신",
       "item.crimsonsteves_mutant_mobs.mutant_skeleton_spawn_egg": "스턴트 스켈레톤 생성 알",
       "entity.crimsonsteves_mutant_mobs.hopkeleton": "스켈레통"
@@ -1156,17 +1364,19 @@
       "attribute.crimsonsteves_mutant_mobs.action_state": "Action State",
       "item.crimsonsteves_mutant_mobs.stunt_skeleton_upper_body_spawn_egg": "Stunt Skeleton Upper Body Spawn Egg",
       "subtitles.mutant_skeleton_avoid": "Stunt skeleton avoids",
-      "subtitles.mutant_skeleton_death": "Stunt skeleton collapses",
       "entity.crimsonsteves_mutant_mobs.mutant_skeleton": "Stunt Skeleton",
+      "subtitles.mutant_skeleton_death": "Stunt skeleton collapses",
       "subtitles.mutant_skeleton_hurt": "Stunt skeleton gets hurt",
       "subtitles.mutant_skeleton_punch": "Stunt skeleton strikes",
       "item.crimsonsteves_mutant_mobs.hopkeleton_spawn_egg": "Hopkeleton Spawn Egg",
+      "item.crimsonsteves_mutant_mobs.chad_withered_boxer_spawn_egg": "Chad Withered Boxer Spawn Egg",
       "subtitles.mutant_skeleton_idle": "Stunt skeleton is nearby",
       "item.crimsonsteves_mutant_mobs.withered_boxer_spawn_egg": "Withered Boxer Spawn Egg",
+      "entity.crimsonsteves_mutant_mobs.withered_boxer": "Withered Boxer",
+      "item.crimsonsteves_mutant_mobs.withered_hopkeleton_spawn_egg": "Withered Hopkeleton Spawn Egg",
       "subtitles.mutant_skeleton_step": "Stunt skeleton steps",
       "subtitles.mutant_skeleton_smash": "Stunt skeleton smashes",
-      "item.crimsonsteves_mutant_mobs.withered_hopkeleton_spawn_egg": "Withered Hopkeleton Spawn Egg",
-      "entity.crimsonsteves_mutant_mobs.withered_boxer": "Withered Boxer",
+      "entity.crimsonsteves_mutant_mobs.chad_withered_boxer": "Chad Withered Boxer",
       "entity.crimsonsteves_mutant_mobs.stunt_skeleton_upper_body": "Stunt Skeleton Upper Body",
       "item.crimsonsteves_mutant_mobs.mutant_skeleton_spawn_egg": "Stunt Skeleton Spawn Egg",
       "entity.crimsonsteves_mutant_mobs.hopkeleton": "Hopkeleton"
@@ -1209,7 +1419,7 @@
   "workspaceSettings": {
     "modid": "crimsonsteves_mutant_mobs",
     "modName": "crimsonsteves_mutant_mobs",
-    "version": "1.5.0",
+    "version": "1.5.2",
     "author": "Crimson Steve, MCreator",
     "websiteURL": "https://mcreator.net",
     "license": "All Rights Reserved",

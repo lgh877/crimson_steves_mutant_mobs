@@ -44,28 +44,28 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.core.BlockPos;
 
-import net.crimsonsteve.simplemutantmobs.procedures.WitheredBoxerOnEntityTickUpdateProcedure;
 import net.crimsonsteve.simplemutantmobs.procedures.WitheredBoxerEntityIsHurtProcedure;
 import net.crimsonsteve.simplemutantmobs.procedures.IsInActionProcedure;
+import net.crimsonsteve.simplemutantmobs.procedures.ChadWitheredBoxerOnEntityTickUpdateProcedure;
 import net.crimsonsteve.simplemutantmobs.init.CrimsonstevesMutantMobsModEntities;
 
-public class WitheredBoxerEntity extends Monster implements GeoEntity {
-	public static final EntityDataAccessor<Boolean> SHOOT = SynchedEntityData.defineId(WitheredBoxerEntity.class, EntityDataSerializers.BOOLEAN);
-	public static final EntityDataAccessor<String> ANIMATION = SynchedEntityData.defineId(WitheredBoxerEntity.class, EntityDataSerializers.STRING);
-	public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.defineId(WitheredBoxerEntity.class, EntityDataSerializers.STRING);
+public class ChadWitheredBoxerEntity extends Monster implements GeoEntity {
+	public static final EntityDataAccessor<Boolean> SHOOT = SynchedEntityData.defineId(ChadWitheredBoxerEntity.class, EntityDataSerializers.BOOLEAN);
+	public static final EntityDataAccessor<String> ANIMATION = SynchedEntityData.defineId(ChadWitheredBoxerEntity.class, EntityDataSerializers.STRING);
+	public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.defineId(ChadWitheredBoxerEntity.class, EntityDataSerializers.STRING);
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	private boolean swinging;
 	private boolean lastloop;
 	private long lastSwing;
 	public String animationprocedure = "empty";
 
-	public WitheredBoxerEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(CrimsonstevesMutantMobsModEntities.WITHERED_BOXER.get(), world);
+	public ChadWitheredBoxerEntity(PlayMessages.SpawnEntity packet, Level world) {
+		this(CrimsonstevesMutantMobsModEntities.CHAD_WITHERED_BOXER.get(), world);
 	}
 
-	public WitheredBoxerEntity(EntityType<WitheredBoxerEntity> type, Level world) {
+	public ChadWitheredBoxerEntity(EntityType<ChadWitheredBoxerEntity> type, Level world) {
 		super(type, world);
-		xpReward = 40;
+		xpReward = 50;
 		setNoAi(false);
 		setMaxUpStep(1.1f);
 		setPersistenceRequired();
@@ -103,11 +103,11 @@ public class WitheredBoxerEntity extends Monster implements GeoEntity {
 
 			@Override
 			public boolean canUse() {
-				double x = WitheredBoxerEntity.this.getX();
-				double y = WitheredBoxerEntity.this.getY();
-				double z = WitheredBoxerEntity.this.getZ();
-				Entity entity = WitheredBoxerEntity.this;
-				Level world = WitheredBoxerEntity.this.level();
+				double x = ChadWitheredBoxerEntity.this.getX();
+				double y = ChadWitheredBoxerEntity.this.getY();
+				double z = ChadWitheredBoxerEntity.this.getZ();
+				Entity entity = ChadWitheredBoxerEntity.this;
+				Level world = ChadWitheredBoxerEntity.this.level();
 				return super.canUse() && IsInActionProcedure.execute(entity);
 			}
 
@@ -116,15 +116,15 @@ public class WitheredBoxerEntity extends Monster implements GeoEntity {
 		this.goalSelector.addGoal(3, new RandomStrollGoal(this, 1) {
 			@Override
 			public boolean canUse() {
-				double x = WitheredBoxerEntity.this.getX();
-				double y = WitheredBoxerEntity.this.getY();
-				double z = WitheredBoxerEntity.this.getZ();
-				Entity entity = WitheredBoxerEntity.this;
-				Level world = WitheredBoxerEntity.this.level();
+				double x = ChadWitheredBoxerEntity.this.getX();
+				double y = ChadWitheredBoxerEntity.this.getY();
+				double z = ChadWitheredBoxerEntity.this.getZ();
+				Entity entity = ChadWitheredBoxerEntity.this;
+				Level world = ChadWitheredBoxerEntity.this.level();
 				return super.canUse() && IsInActionProcedure.execute(entity);
 			}
 		});
-		this.targetSelector.addGoal(4, new HurtByTargetGoal(this).setAlertOthers());
+		this.targetSelector.addGoal(4, new HurtByTargetGoal(this));
 		this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
 		this.goalSelector.addGoal(6, new FloatGoal(this));
 	}
@@ -140,29 +140,26 @@ public class WitheredBoxerEntity extends Monster implements GeoEntity {
 	}
 
 	@Override
-	public SoundEvent getAmbientSound() {
-		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.drowned.ambient_water"));
-	}
-
-	@Override
 	public void playStepSound(BlockPos pos, BlockState blockIn) {
-		this.playSound(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.soul_sand.step")), 0.15f, 1);
+		this.playSound(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.soul_sand.hit")), 0.15f, 1);
 	}
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
-		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.drowned.hurt_water"));
+		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.wither.hurt"));
 	}
 
 	@Override
 	public SoundEvent getDeathSound() {
-		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.drowned.death_water"));
+		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.wither.ambient"));
 	}
 
 	@Override
 	public boolean hurt(DamageSource source, float amount) {
 		WitheredBoxerEntityIsHurtProcedure.execute(this);
 		if (source.is(DamageTypes.IN_FIRE))
+			return false;
+		if (source.is(DamageTypes.FALL))
 			return false;
 		if (source.is(DamageTypes.DROWN))
 			return false;
@@ -189,7 +186,7 @@ public class WitheredBoxerEntity extends Monster implements GeoEntity {
 	@Override
 	public void baseTick() {
 		super.baseTick();
-		WitheredBoxerOnEntityTickUpdateProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
+		ChadWitheredBoxerOnEntityTickUpdateProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
 		this.refreshDimensions();
 	}
 
@@ -204,10 +201,10 @@ public class WitheredBoxerEntity extends Monster implements GeoEntity {
 	public static AttributeSupplier.Builder createAttributes() {
 		AttributeSupplier.Builder builder = Mob.createMobAttributes();
 		builder = builder.add(Attributes.MOVEMENT_SPEED, 0.3);
-		builder = builder.add(Attributes.MAX_HEALTH, 40);
+		builder = builder.add(Attributes.MAX_HEALTH, 75);
 		builder = builder.add(Attributes.ARMOR, 0);
-		builder = builder.add(Attributes.ATTACK_DAMAGE, 3);
-		builder = builder.add(Attributes.FOLLOW_RANGE, 32);
+		builder = builder.add(Attributes.ATTACK_DAMAGE, 4);
+		builder = builder.add(Attributes.FOLLOW_RANGE, 64);
 		return builder;
 	}
 
@@ -241,7 +238,7 @@ public class WitheredBoxerEntity extends Monster implements GeoEntity {
 	protected void tickDeath() {
 		++this.deathTime;
 		if (this.deathTime == 20) {
-			this.remove(WitheredBoxerEntity.RemovalReason.KILLED);
+			this.remove(ChadWitheredBoxerEntity.RemovalReason.KILLED);
 			this.dropExperience();
 		}
 	}

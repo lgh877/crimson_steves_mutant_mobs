@@ -9,6 +9,7 @@ import net.crimsonsteve.simplemutantmobs.entity.WitheredBoxerEntity;
 import net.crimsonsteve.simplemutantmobs.entity.StuntSkeletonUpperBodyEntity;
 import net.crimsonsteve.simplemutantmobs.entity.MutantSkeletonEntity;
 import net.crimsonsteve.simplemutantmobs.entity.HopkeletonEntity;
+import net.crimsonsteve.simplemutantmobs.entity.ChadWitheredBoxerEntity;
 
 @Mod.EventBusSubscriber
 public class EntityAnimationFactory {
@@ -44,6 +45,13 @@ public class EntityAnimationFactory {
 				}
 			}
 			if (event.getEntity() instanceof WitheredBoxerEntity syncable) {
+				String animation = syncable.getSyncedAnimation();
+				if (!animation.equals("undefined")) {
+					syncable.setAnimation("undefined");
+					syncable.animationprocedure = animation;
+				}
+			}
+			if (event.getEntity() instanceof ChadWitheredBoxerEntity syncable) {
 				String animation = syncable.getSyncedAnimation();
 				if (!animation.equals("undefined")) {
 					syncable.setAnimation("undefined");

@@ -21,6 +21,7 @@ import net.crimsonsteve.simplemutantmobs.entity.WitheredBoxerEntity;
 import net.crimsonsteve.simplemutantmobs.entity.StuntSkeletonUpperBodyEntity;
 import net.crimsonsteve.simplemutantmobs.entity.MutantSkeletonEntity;
 import net.crimsonsteve.simplemutantmobs.entity.HopkeletonEntity;
+import net.crimsonsteve.simplemutantmobs.entity.ChadWitheredBoxerEntity;
 import net.crimsonsteve.simplemutantmobs.CrimsonstevesMutantMobsMod;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -43,6 +44,8 @@ public class CrimsonstevesMutantMobsModEntities {
 					.sized(1.2f, 1f));
 	public static final RegistryObject<EntityType<WitheredBoxerEntity>> WITHERED_BOXER = register("withered_boxer", EntityType.Builder.<WitheredBoxerEntity>of(WitheredBoxerEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true)
 			.setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(WitheredBoxerEntity::new).fireImmune().sized(0.6f, 1.8f));
+	public static final RegistryObject<EntityType<ChadWitheredBoxerEntity>> CHAD_WITHERED_BOXER = register("chad_withered_boxer", EntityType.Builder.<ChadWitheredBoxerEntity>of(ChadWitheredBoxerEntity::new, MobCategory.MONSTER)
+			.setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(ChadWitheredBoxerEntity::new).fireImmune().sized(1f, 2.6f));
 
 	private static <T extends Entity> RegistryObject<EntityType<T>> register(String registryname, EntityType.Builder<T> entityTypeBuilder) {
 		return REGISTRY.register(registryname, () -> (EntityType<T>) entityTypeBuilder.build(registryname));
@@ -56,6 +59,7 @@ public class CrimsonstevesMutantMobsModEntities {
 			WitheredHopkeletonEntity.init();
 			StuntSkeletonUpperBodyEntity.init();
 			WitheredBoxerEntity.init();
+			ChadWitheredBoxerEntity.init();
 		});
 	}
 
@@ -66,5 +70,6 @@ public class CrimsonstevesMutantMobsModEntities {
 		event.put(WITHERED_HOPKELETON.get(), WitheredHopkeletonEntity.createAttributes().build());
 		event.put(STUNT_SKELETON_UPPER_BODY.get(), StuntSkeletonUpperBodyEntity.createAttributes().build());
 		event.put(WITHERED_BOXER.get(), WitheredBoxerEntity.createAttributes().build());
+		event.put(CHAD_WITHERED_BOXER.get(), ChadWitheredBoxerEntity.createAttributes().build());
 	}
 }
